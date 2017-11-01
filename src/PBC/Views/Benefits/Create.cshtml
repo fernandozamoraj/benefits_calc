@@ -1,0 +1,128 @@
+﻿@model PBC.Models.Family
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style type="text/css">
+    .invalid{
+        border: solid;
+        border-width: 2;
+        border-color: #ff0000;
+    }
+</style>
+
+<h2>Create</h2>
+
+<div id="calc-app">
+    <div class="row">
+
+        <!--Add member form-->
+        <div class="col s6 m6">
+            <div class="row" id="invalid-message" data-validation-id="0">
+
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 onehd" data-validation-id="1">
+                    <input placeholder="First Name" id="first-name" type="text" class="validate" v-model="firstName" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 onehd" data-validation-id="2">
+                    <input placeholder="Last Name" id="last-name" type="text" class="validate" v-model="lastName" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 onehd" data-validation-id="3">
+                    <input placeholder="01/01/1972" id="date-of-birth" type="text" class="validate" v-model="dob" required>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class=" col s6 m6" id="is-employee-div" data-validation-id="4">
+                    <input id="is-employee" type="checkbox" v-on:click="isEmployeeChanged" v-model="isEmployee">
+                    <label for="is-employee">Employee</label>
+                </div>
+
+
+                <div class="col s6 m6" id="is-spouse-div" data-validation-id="5">
+                    <input id="is-spouse" type="checkbox" v-on:click="isSpouseChanged" v-model="isSpouse">
+                    <label for="is-spouse">Spouse</label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col s6 m6 onehd">
+                    <button class="waves-effect waves-light btn teal darken-3" id="btn-calculate" v-on:click="calculate">
+                        <i class="material-icons right">attach_money</i>Calculate
+                    </button>
+                </div>
+                <div class="col s6 m6 onehd">
+                    <button class="waves-effect waves-light btn teal darken-3" id="btn-add-member" v-on:click="add">
+                        <i class="material-icons right">arrow_forward</i>Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--End of add member form-->
+        <!--Family Results Section-->
+        <div class="col s6 m6">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection" style="border: none;">
+                        <li class="collection-item avatar blue-grey lighten-5" style="margin: 5px; border-radius: 10px;">
+                            <span class="bold"></span><br />
+                            <p>
+                                <span class="blue-grey-text lighten-3"></span> <span class="grey-text lighten-2">{{results.employeeName}}</span><br>
+                                <span class="blue-grey-text lighten-3">Family Members:</span> <span class="grey-text lighten-2">{{results.familyMembers}}</span><br>
+                                <span class="blue-grey-text lighten-3">Annual Salary:</span> <span class="grey-text lighten-2">{{results.annualSalary}}</span><br>
+                                <span class="blue-grey-text lighten-3">Annual Costs:</span> <span class="grey-text lighten-2">{{results.annualCosts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Per Period Costs:</span> <span class="grey-text lighten-2">{{results.perPeriodCosts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Employer Discounts:</span> <span class="grey-text lighten-2">{{results.employerDiscounts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Adjusted Pay Period:</span> <span class="grey-text lighten-2">{{results.adjustedPeriodPayAmount}}</span><br>
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons icon-black">attach_money</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End of Family Results Section-->
+        <!--Family Members Section-->
+        <div class="col s6 m6">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection" style="border: none;" v-for="member in members">
+                        <li class="collection-item avatar blue-grey lighten-5" style="margin: 5px; border-radius: 10px;">
+                            <span class="bold" data-bind="text: userTag"></span><br />
+                            <p>
+                                <span class="blue-grey-text lighten-3">Name:</span> <span class="grey-text lighten-2">{{member.fullName}}</span><br>
+                                <span class="blue-grey-text lighten-3">DOB:</span> <span class="grey-text lighten-2">{{member.dob}}</span><br>
+                                <span class="blue-grey-text lighten-3">Relationshp:</span> <span class="grey-text lighten-2">{{member.role}}</span><br>
+
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons icon-black">person</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End of Family Members Section-->
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="~/Scripts/calculations-app.js"></script>
+
