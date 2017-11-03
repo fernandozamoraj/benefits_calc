@@ -24,29 +24,29 @@
             </div>
             <div class="row">
                 <div class="input-field col s12 m12 onehd" data-validation-id="1">
-                    <input placeholder="First Name" id="first-name" type="text" class="validate" v-model="firstName" required>
+                    <input placeholder="First Name" id="first-name" type="text" class="validate" v-model="FirstName" required>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 m12 onehd" data-validation-id="2">
-                    <input placeholder="Last Name" id="last-name" type="text" class="validate" v-model="lastName" required>
+                    <input placeholder="Last Name" id="last-name" type="text" class="validate" v-model="LastName" required>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 m12 onehd" data-validation-id="3">
-                    <input placeholder="01/01/1972" id="date-of-birth" type="text" class="validate" v-model="dob" required>
+                    <input placeholder="01/01/1972" id="date-of-birth" type="text" class="validate" v-model="DateOfBirth" required>
                 </div>
             </div>
             <div class="row">
 
                 <div class=" col s6 m6" id="is-employee-div" data-validation-id="4">
-                    <input id="is-employee" type="checkbox" v-on:click="isEmployeeChanged" v-model="isEmployee">
+                    <input id="is-employee" type="checkbox" v-on:click="isEmployeeChanged" v-model="IsEmployee">
                     <label for="is-employee">Employee</label>
                 </div>
 
 
                 <div class="col s6 m6" id="is-spouse-div" data-validation-id="5">
-                    <input id="is-spouse" type="checkbox" v-on:click="isSpouseChanged" v-model="isSpouse">
+                    <input id="is-spouse" type="checkbox" v-on:click="isSpouseChanged" v-model="IsSpouse">
                     <label for="is-spouse">Spouse</label>
                 </div>
 
@@ -66,20 +66,20 @@
         </div>
         <!--End of add member form-->
         <!--Family Results Section-->
-        <div class="col s6 m6">
+        <div class="col s6 m6" v-if="results.AnnualSalary > 1">
             <div class="row">
                 <div class="col s12">
                     <ul class="collection" style="border: none;">
                         <li class="collection-item avatar blue-grey lighten-5" style="margin: 5px; border-radius: 10px;">
                             <span class="bold"></span><br />
                             <p>
-                                <span class="blue-grey-text lighten-3"></span> <span class="grey-text lighten-2">{{results.employeeName}}</span><br>
-                                <span class="blue-grey-text lighten-3">Family Members:</span> <span class="grey-text lighten-2">{{results.familyMembers}}</span><br>
-                                <span class="blue-grey-text lighten-3">Annual Salary:</span> <span class="grey-text lighten-2">{{results.annualSalary}}</span><br>
-                                <span class="blue-grey-text lighten-3">Annual Costs:</span> <span class="grey-text lighten-2">{{results.annualCosts}}</span><br>
-                                <span class="blue-grey-text lighten-3">Per Period Costs:</span> <span class="grey-text lighten-2">{{results.perPeriodCosts}}</span><br>
-                                <span class="blue-grey-text lighten-3">Employer Discounts:</span> <span class="grey-text lighten-2">{{results.employerDiscounts}}</span><br>
-                                <span class="blue-grey-text lighten-3">Adjusted Pay Period:</span> <span class="grey-text lighten-2">{{results.adjustedPeriodPayAmount}}</span><br>
+                                <span class="blue-grey-text lighten-3"></span> <span class="grey-text lighten-2">{{results.EmployeeName}}</span><br>
+                                <span class="blue-grey-text lighten-3">Family Members:</span> <span class="grey-text lighten-2">{{results.FamilyMembers}}</span><br>
+                                <span class="blue-grey-text lighten-3">Annual Salary:</span> <span class="grey-text lighten-2">{{results.AnnualSalary}}</span><br>
+                                <span class="blue-grey-text lighten-3">Annual Costs:</span> <span class="grey-text lighten-2">{{results.AnnualCosts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Per Period Costs:</span> <span class="grey-text lighten-2">{{results.PerPeriodCosts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Employer Discounts:</span> <span class="grey-text lighten-2">{{results.EmployerDiscounts}}</span><br>
+                                <span class="blue-grey-text lighten-3">Adjusted Pay Period:</span> <span class="grey-text lighten-2">{{results.AdjustedPeriodPayAmount}}</span><br>
                             </p>
                             <a href="#!" class="secondary-content"><i class="material-icons icon-black">attach_money</i></a>
                         </li>
@@ -96,9 +96,9 @@
                         <li class="collection-item avatar blue-grey lighten-5" style="margin: 5px; border-radius: 10px;">
                             <span class="bold" data-bind="text: userTag"></span><br />
                             <p>
-                                <span class="blue-grey-text lighten-3">Name:</span> <span class="grey-text lighten-2">{{member.fullName}}</span><br>
-                                <span class="blue-grey-text lighten-3">DOB:</span> <span class="grey-text lighten-2">{{member.dob}}</span><br>
-                                <span class="blue-grey-text lighten-3">Relationshp:</span> <span class="grey-text lighten-2">{{member.role}}</span><br>
+                                <span class="blue-grey-text lighten-3">Name:</span> <span class="grey-text lighten-2">{{member.FullName}}</span><br>
+                                <span class="blue-grey-text lighten-3">DOB:</span> <span class="grey-text lighten-2">{{member.DateOfBirth}}</span><br>
+                                <span class="blue-grey-text lighten-3">Relationshp:</span> <span class="grey-text lighten-2">{{member.Role}}</span><br>
 
                             </p>
                             <a href="#!" class="secondary-content"><i class="material-icons icon-black">person</i></a>
@@ -123,6 +123,8 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="https://unpkg.com/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.16/vue-resource.min.js"></script>
+
 <script src="~/Scripts/calculations-app.js"></script>
 

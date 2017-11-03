@@ -53,15 +53,5 @@ namespace PBC.Controllers
         public void Delete(int id)
         {
         }
-
-        [Route("calculate")]
-        [HttpPost]
-        public HttpResponseMessage Calculate(Family model)
-        {
-            _calculation.RunCalculations(model, _appConfig);
-            CalculatedResultsModel results = _modelMapper.MapToResults(_calculation);
-            return Request.CreateResponse(HttpStatusCode.OK, results);
-        }
-
     }
 }

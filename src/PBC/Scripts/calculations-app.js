@@ -1,14 +1,14 @@
 ﻿
 function Member(fname, lname, dob, isSpouse, isEmployee) {
-    this.firstName = fname;
-    this.lastName = lname;
-    this.dob = dob;
-    this.isSpouse = isSpouse;
-    this.isEmployee = isEmployee;
+    this.FirstName = fname;
+    this.LastName = lname;
+    this.DateOfBirth = dob;
+    this.IsSpouse = isSpouse;
+    this.IsEmployee = isEmployee;
 
-    this.fullName = fname + ' ' + lname;
-    this.role = isSpouse ? 'Spouse' : 'Dependent'
-    this.role = isEmployee ? 'Employee' : this.role
+    this.FullName = fname + ' ' + lname;
+    this.Role = isSpouse ? 'Spouse' : 'Dependent'
+    this.Role = isEmployee ? 'Employee' : this.role
 }
 
 // This validation code take from stack overflow but it's pretty clear in what it 
@@ -42,26 +42,47 @@ function isValidDate(dateString) {
     return day > 0 && day <= monthLength[month - 1];
 };
 
+function containsEmployee(members) {
+    for (let i = 0; i < members.length; i++) {
+        if (members[i].IsEmployee) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function validateCalculateSubmit(members) {
+    var results = {};
+
+    if (members.Length < 1 || containsEmployee(members) === false) {
+        results.field = 1;
+        results.isValid = false;
+        results.message = "Employee is required";
+    }
+
+    return results;
+}
+
 function validate(candidateMember, members) {
     var results = {};
     results.isValid = true;
 
-    if (candidateMember.firstName.length < 2) {
+    if (candidateMember.FirstName.length < 2) {
         results.field = 1;
         results.isValid = false;
         results.message = "First Name is required";
     }
-    else if (candidateMember.lastName.length < 2) {
+    else if (candidateMember.LastName.length < 2) {
         results.field = 2;
         results.isValid = false;
         results.message = "Last Name is required";
     }
-    else if (candidateMember.dob.length != 10) {
+    else if (candidateMember.DateOfBirth.length != 10) {
         results.field = 3;
         results.isValid = false;
         results.message = "Date of birth is not valid or has invalid format";
     }
-    else if (isValidDate(candidateMember.dob) === false) {
+    else if (isValidDate(candidateMember.DateOfBirth) === false) {
         results.field = 3;
         results.isValid = false;
         results.message = "Date of birth is not valid or has invalid format";
@@ -69,13 +90,13 @@ function validate(candidateMember, members) {
 
     if (results.isValid === true) {
         for (var i = 0; i < members.length; i++)             {
-            if (candidateMember.isEmployee && members[i].isEmployee) {
+            if (candidateMember.IsEmployee && members[i].IsEmployee) {
                 results.field = 4;
                 results.isValid = false;
                 results.message = "There is already an employee entered... only one allowed";
                 break;
             }
-            if (candidateMember.isSpouse && members[i].isSpouse) {
+            if (candidateMember.IsSpouse && members[i].IsSpouse) {
                 results.field = 5;
                 results.isValid = false;
                 results.message = "There is already a spouse entered... only one allowed";
@@ -113,27 +134,37 @@ function clearInvalidForm() {
     invalidMessageEl.innerHTML = "";
 }
 
+//Taken from http://www.jacklmoore.com/notes/rounding-in-javascript/
+function round(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+}
+
 var app = new Vue({
+    http:{
+        emulateJSON: true,
+        emulateHTTP: true
+    },
     el: '#calc-app',
     data: {
-        message: 'Hello Vue!',
-        firstName: '',
-        lastName: '',
-        dob: '',
-        isSpouse: false,
-        isEmployee: false,
+        FirstName: '',
+        LastName: '',
+        DateOfBirth: '',
+        IsEmployee: false,
+        IsSpouse: false,
         members: [],
         results: {
-            annualSalary: 0.0,
-            annualCosts: 0.0,
-            employerDiscounts: 0.0,
-            adjustedPeriodPayAmount: 0.0,
-            perPeriodCosts: 0.0
+            EmployeeName: '',
+            AnnualSalary: 0.0,
+            FamilyMembers: 0,
+            AnnualCosts: 0.0,
+            EmployerDiscounts: 0.0,
+            AdjustedPeriodPayAmount: 0.0,
+            PerPeriodCosts: 0.0
         }
     },
     methods: {
         add: function () {
-            var candidateMember = new Member(this.firstName, this.lastName, this.dob, this.isSpouse, this.isEmployee);
+            var candidateMember = new Member(this.FirstName, this.LastName, this.DateOfBirth, this.IsSpouse, this.IsEmployee);
             var results = validate(candidateMember, this.members);
             clearInvalidForm();
 
@@ -147,66 +178,51 @@ var app = new Vue({
         },
         calculate: function () {
             let self = this;
+            let results = validateCalculateSubmit(self.members);
+            clearInvalidForm();
 
-            let tempMembers = [];
-
-            //convert data properly for json transformation to
-            //objects on the back end
-            for(let i=0;i<self.members.length;i++){
-                tempMembers.push(
-                    
-                    {
-                        FirstName: self.members[i].firstName,
-                        LastName: self.members[i].lastName,
-                        DateOfBirth: self.members[i].dob,
-                        IsEmployee: self.members[i].isEmployee,
-                        IsSpouse: self.members[i].isSpouse
-                    }
-               );
+            if (results.isValid === false) {
+                updateInvalidForm(results);
+                return;
             }
-
-            function getEmployeeName(results) {
-                //TODO: fix
-                return "Joe Smith";
-            }
-
-            $.ajax("/api/benefitsapi/", {
-                type: "POST",
-                success: function (data) {
-
-                    console.log(data);
-                    let d0 = data[0];
-                    console.log(d0);
-
-                    self.results.employeeName = getEmployeeName(d0);
-                    self.results.familyMembers = d0.Family.Members.length;
-                    self.results.annualSalary = d0.AnnualSalary;
-                    self.results.annualCosts = d0.AnnualCosts;
-                    self.results.employerDiscounts = d0.EmployerDiscounts;
-                    self.results.adjustedPeriodPayAmount = d0.AdjustedPeriodPayAmount;
-                    self.results.perPeriodCosts = d0.PerPeriodCosts;
+            
+            this.$http.post('/api/benefitsapi/',
+                {
+                    Members: self.members
                 },
-                dataType: 'JSON',
-                data: {
-                        Members: tempMembers
+                function(data, status, request){
+                    if(status == 200)
+                    {
+                        console.log(data);
+                        let results = data[0];
+                        console.log(results);
+
+                        self.results.EmployeeName = results.EmployeeName;
+                        self.results.FamilyMembers = results.Family.Members.length;
+                        self.results.AnnualSalary = round(results.AnnualSalary, 2);
+                        self.results.AnnualCosts = round(results.AnnualCosts, 2);
+                        self.results.EmployerDiscounts = round(results.EmployerDiscounts, 2);
+                        self.results.AdjustedPeriodPayAmount = round(results.AdjustedPeriodPayAmount, 2);
+                        self.results.PerPeriodCosts = round(results.PerPeriodCosts, 2);
+                    }
                 }
-            });
+            );
         },
         clearMember: function () {
-            this.firstName = '';
-            this.lastName = '';
-            this.dob = '';
-            this.isSpouse = false;
-            this.isEmployee = false;
+            this.FirstName = '';
+            this.LastName = '';
+            this.DateOfBirth = '';
+            this.IsSpouse = false;
+            this.IsEmployee = false;
         },
         isEmployeeChanged: function () {
-            if (this.isSpouse === true && this.isEmployee === false) {
-                this.isSpouse = false;
+            if (this.IsSpouse === true && this.IsEmployee === false) {
+                this.IsSpouse = false;
             }
         },
         isSpouseChanged: function () {
-            if (this.isSpouse === false && this.isEmployee === true) {
-                this.isEmployee = false;
+            if (this.IsSpouse === false && this.IsEmployee === true) {
+                this.IsEmployee = false;
             }
         }
     }

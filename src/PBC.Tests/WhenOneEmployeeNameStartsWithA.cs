@@ -27,7 +27,6 @@ namespace PBC.Tests
                      LastName = "Smith"
                  }
               },
-
             };
 
             _calculation = new Calculation();

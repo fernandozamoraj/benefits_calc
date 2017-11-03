@@ -58,9 +58,9 @@ namespace PBC.Tests
         }
 
         [TestMethod]
-        public void EmployerDiscountsShouldBe0()
+        public void EmployerDiscountsShouldBe200()
         {
-            Assert.AreEqual(200, _calculation.EmployerDiscounts, "Employer discounts should be 0");
+            Assert.AreEqual(200, _calculation.EmployerDiscounts, "Employer discounts should be 200");
         }
     }
 }

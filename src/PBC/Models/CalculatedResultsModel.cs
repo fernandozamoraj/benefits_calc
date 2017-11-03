@@ -7,6 +7,7 @@ namespace PBC.Models
 {
     public class CalculatedResultsModel
     {
+        public String EmployeeName { get; set; }
         public Family Family{ get;set;}
         public Decimal AnnualSalary { get; set; }
         public Decimal AnnualCosts { get; set; }
