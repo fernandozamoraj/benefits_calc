@@ -1,5 +1,4 @@
-﻿using System;
-namespace PBC.Models
+﻿namespace PBC.Services
 {
     public interface IAppConfiguration
     {

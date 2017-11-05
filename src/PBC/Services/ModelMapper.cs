@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using PBC.Models;
+using PBC.App.Models;
 
-namespace PBC.Models
+namespace PBC.App.Services
 {
-    public class ModelMapper : PBC.Models.IModelMapper
+    public class ModelMapper : IModelMapper
     {
-        public CalculatedResultsModel MapToResults(ICalculation calculation)
+        public CalculatedResultsModel MapToResults(CalculationResults calculation)
         {
             CalculatedResultsModel model = new CalculatedResultsModel();
 

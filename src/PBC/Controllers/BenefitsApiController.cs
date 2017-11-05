@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using PBC.Models;
+using PBC.App.Models;
+using PBC.App.Services;
+using PBC.Services;
 
 namespace PBC.Controllers
 {
@@ -13,21 +12,20 @@ namespace PBC.Controllers
     {
 
         IAppConfiguration _appConfig;
-        ICalculation _calculation;
+        ICalculator _calculator;
         IModelMapper _modelMapper;
 
-        public BenefitsApiController(IAppConfiguration appConfig, ICalculation calculation, IModelMapper modelMapper)
+        public BenefitsApiController(IAppConfiguration appConfig, ICalculator calculator, IModelMapper modelMapper)
         {
-            _calculation = calculation;
+            _calculator = calculator;
             _appConfig = appConfig;
             _modelMapper = modelMapper;
         }
 
         // GET: api/BenefitsApi
-        public IEnumerable<CalculatedResultsModel> Get()
+        public string Get()
         {
-            CalculatedResultsModel[] results = new CalculatedResultsModel[]{_modelMapper.MapToResults(_calculation)};
-            return results;
+            return "Not Implemented";
         }
 
         // GET: api/BenefitsApi/5
@@ -39,9 +37,10 @@ namespace PBC.Controllers
         // POST: api/BenefitsApi
         public IEnumerable<CalculatedResultsModel> Post([FromBody]Family model)
         {
-            _calculation.RunCalculations(model, _appConfig);
-            CalculatedResultsModel[] results = new CalculatedResultsModel[] { _modelMapper.MapToResults(_calculation) };
-            return results;
+            CalculationResults results = _calculator.RunCalculations(model, _appConfig);
+            CalculatedResultsModel resultsModel =  _modelMapper.MapToResults(results);
+
+            return new List<CalculatedResultsModel> { resultsModel };
         }
 
         // PUT: api/BenefitsApi/5

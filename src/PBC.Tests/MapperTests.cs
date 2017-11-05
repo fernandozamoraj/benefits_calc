@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PBC.Models;
+using PBC.App.Models;
+using PBC.App.Services;
+using PBC.Services;
 
 namespace PBC.Tests
 {
@@ -12,10 +11,11 @@ namespace PBC.Tests
     public class MapperTests
     {
         protected Family _family;
-        protected Calculation _calculation;
+        protected Calculator _calculator;
         protected AppConfiguration _appConfig;
         protected ModelMapper _mapper;
         protected CalculatedResultsModel _results;
+        protected CalculationResults _calculation;
 
         [TestInitialize]
         public void SetUp()
@@ -32,10 +32,10 @@ namespace PBC.Tests
 
             };
 
-            _calculation = new Calculation();
+            _calculator = new Calculator();
             _appConfig = new AppConfiguration();
 
-            _calculation.RunCalculations(_family, _appConfig);
+            _calculation = _calculator.RunCalculations(_family, _appConfig);
             _mapper = new ModelMapper();
             _results = _mapper.MapToResults(_calculation);
         }

@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using PBC.Models;
 
-namespace PBC.Models.Repos
+namespace PBC.Repos
 {
-
-    public class EmployeeRepository : PBC.Models.Repos.IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
-        private List<EmployeeViewModel> _employees;
+        private List<Employee> _employees;
 
         public EmployeeRepository()
         {
-            _employees = new List<EmployeeViewModel>{
-                new EmployeeViewModel
+            _employees = new List<Employee>{
+                new Employee
                 {
                     Name = "Smith, James",
                     Dependents = 3,
                     TotalCost = 2500
                 },
-                new EmployeeViewModel
+                new Employee
                 {
                     Name = "Joiner, John",
                     Dependents = 2,
                     TotalCost = 2000
                 },
-                new EmployeeViewModel
+                new Employee
                 {
                     Name = "Jones, Susan",
                     Dependents = 1,
@@ -34,7 +31,7 @@ namespace PBC.Models.Repos
             };
         }
 
-        public List<EmployeeViewModel> GetAll()
+        public List<Employee> GetAll()
         {
             return _employees;
         }

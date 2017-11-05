@@ -8,11 +8,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PBC.Tests</RootNamespace>
     <AssemblyName>PBC.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +92,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PBC.Models\PBC.Models.csproj">
+      <Project>{5e3ad4fc-34cf-4d2f-af35-84eddd299068}</Project>
+      <Name>PBC.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PBC.Services\PBC.Services.csproj">
+      <Project>{7b061908-3393-4fe3-a1c5-2100356460f9}</Project>
+      <Name>PBC.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PBC\PBC.csproj">
       <Project>{D9640A47-5446-49D7-9255-F01F44312D4B}</Project>
       <Name>PBC</Name>

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using PBC.Services;
 
-namespace PBC.Models
+namespace PBC.App.Models
 {
     /// <summary>
     /// AppConfiguration
     /// This information would be best handled coming from the configuration file
     /// That way if it changes it can be adjusted
     /// </summary>
-    public class AppConfiguration : PBC.Models.IAppConfiguration
+    public class AppConfiguration : IAppConfiguration
     {
         public decimal AnnualSalary
         {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PBC.Models.Repos;
+﻿using System.Web.Mvc;
+using PBC.Repos;
 
 namespace PBC.Controllers
 {
@@ -30,7 +26,5 @@ namespace PBC.Controllers
         {
             return View();
         }
-
-
     }
 }
