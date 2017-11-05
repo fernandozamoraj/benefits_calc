@@ -23,16 +23,16 @@ function isValidDate(dateString) {
         return false;
 
     // Parse the date parts to integers
-    var parts = dateString.split("/");
-    var day = parseInt(parts[1], 10);
-    var month = parseInt(parts[0], 10);
-    var year = parseInt(parts[2], 10);
+    let parts = dateString.split("/");
+    let day = parseInt(parts[1], 10);
+    let month = parseInt(parts[0], 10);
+    let year = parseInt(parts[2], 10);
 
     // Check the ranges of month and year
     if (year < 1000 || year > 3000 || month == 0 || month > 12)
         return false;
 
-    var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     // Adjust for leap years
     if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
@@ -52,7 +52,7 @@ function containsEmployee(members) {
 }
 
 function validateCalculateSubmit(members) {
-    var results = {};
+    let results = {};
 
     if (members.Length < 1 || containsEmployee(members) === false) {
         results.field = 1;
@@ -64,7 +64,7 @@ function validateCalculateSubmit(members) {
 }
 
 function validate(candidateMember, members) {
-    var results = {};
+    let results = {};
     results.isValid = true;
 
     if (candidateMember.FirstName.length < 2) {
@@ -89,7 +89,7 @@ function validate(candidateMember, members) {
     }
 
     if (results.isValid === true) {
-        for (var i = 0; i < members.length; i++)             {
+        for (let i = 0; i < members.length; i++)             {
             if (candidateMember.IsEmployee && members[i].IsEmployee) {
                 results.field = 4;
                 results.isValid = false;
@@ -110,20 +110,20 @@ function validate(candidateMember, members) {
 
 function updateInvalidForm(results) {
 
-    var elements = document.querySelectorAll('[data-validation-id="' + results.field + '"]');
+    let elements = document.querySelectorAll('[data-validation-id="' + results.field + '"]');
 
     elements[0].className += " invalid";
 
-    var invalidMessageEl = document.getElementById("invalid-message");
+    let invalidMessageEl = document.getElementById("invalid-message");
     invalidMessageEl.innerHTML = results.message;
     invalidMessageEl.className += " invalid";
 }
 
 function clearInvalidForm() {
-    var elements = document.querySelectorAll('[data-validation-id');
+    let elements = document.querySelectorAll('[data-validation-id');
 
     //remove invalid class from from all elements
-    for (var i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
 
         if (elements && elements[0]) {
             elements[i].className = elements[i].className.replace("invalid", "");
@@ -164,15 +164,14 @@ var app = new Vue({
     },
     methods: {
         add: function () {
-            var candidateMember = new Member(this.FirstName, this.LastName, this.DateOfBirth, this.IsSpouse, this.IsEmployee);
-            var results = validate(candidateMember, this.members);
+            let candidateMember = new Member(this.FirstName, this.LastName, this.DateOfBirth, this.IsSpouse, this.IsEmployee);
+            let results = validate(candidateMember, this.members);
             clearInvalidForm();
 
-            if (results.isValid) {
+            if (results.isValid){
                 this.members.push(candidateMember);
                 this.clearMember();
-            }
-            else {
+            } else {
                 updateInvalidForm(results);
             }
         },
@@ -181,7 +180,7 @@ var app = new Vue({
             let results = validateCalculateSubmit(self.members);
             clearInvalidForm();
 
-            if (results.isValid === false) {
+            if (results.isValid === false){
                 updateInvalidForm(results);
                 return;
             }
