@@ -9,15 +9,14 @@ namespace PBC.Tests
     [TestClass]
     class WhenOneEmployeeWith2Dependants
     {
-        protected Family _family;
-        protected Calculator _calculator;
-        protected AppConfiguration _appConfig;
+
         protected CalculationResults _calculation;
+        AppConfiguration _appConfig;
 
         [TestInitialize]
         public void SetUp()
         {
-            _family = new Family
+            Family family = new Family
             {
                 Members = new List<Person>{
                  new Person{
@@ -36,11 +35,12 @@ namespace PBC.Tests
               },
 
             };
+            
 
-            _calculator = new Calculator();
+            Calculator calculator = new Calculator();
             _appConfig = new AppConfiguration();
 
-            _calculation = _calculator.RunCalculations(_family, _appConfig);
+            _calculation = calculator.RunCalculations(family, _appConfig);
         }
 
         [TestMethod]

@@ -6,7 +6,6 @@ namespace PBC.Services
     {
         public CalculationResults RunCalculations(Family family, IAppConfiguration appConfig)
         {
-
             decimal totalAnnualCosts = 0;
             decimal employerDiscounts = 0;
             decimal annualSalary = appConfig.AnnualSalary;
@@ -45,7 +44,7 @@ namespace PBC.Services
 
         private bool QualifiesForDiscount(string name)
         {
-            if (name.ToUpper()[0] == 'A')
+            if (!string.IsNullOrEmpty(name) && name.ToUpper()[0] == 'A')
             {
                 return true;
             }

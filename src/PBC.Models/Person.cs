@@ -2,6 +2,10 @@
 
 namespace PBC.Models
 {
+    /// <summary>
+    /// Person is simply an object that holds attributes
+    /// for a member in the plan
+    /// </summary>
     public class Person
     {
         public string FirstName { get; set; }
