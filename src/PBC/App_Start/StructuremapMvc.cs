@@ -22,7 +22,7 @@ using System.Web.Http.Dependencies;
 using System.Web.Mvc;
 using WebActivatorEx;
 using StructureMap;
-using PBC.Controllers;
+using PBC.App.Controllers;
 using PBC.App.Services;
 using PBC.Services;
 using PBC.Repos;

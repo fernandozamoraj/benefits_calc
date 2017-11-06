@@ -52,7 +52,7 @@ function containsEmployee(members) {
 }
 
 function validateCalculateSubmit(members) {
-    let results = {};
+    let results = {isValid: true, message: ''};
 
     if (members.Length < 1 || containsEmployee(members) === false) {
         results.field = 1;
@@ -146,11 +146,6 @@ var app = new Vue({
     },
     el: '#calc-app',
     data: {
-        FirstName: '',
-        LastName: '',
-        DateOfBirth: '',
-        IsEmployee: false,
-        IsSpouse: false,
         members: [],
         results: {
             EmployeeName: '',
@@ -163,19 +158,7 @@ var app = new Vue({
         }
     },
     methods: {
-        add: function () {
-            let candidateMember = new Member(this.FirstName, this.LastName, this.DateOfBirth, this.IsSpouse, this.IsEmployee);
-            let results = validate(candidateMember, this.members);
-            clearInvalidForm();
-
-            if (results.isValid){
-                this.members.push(candidateMember);
-                this.clearMember();
-            } else {
-                updateInvalidForm(results);
-            }
-        },
-        calculate: function () {
+        runCalculations: function () {
             let self = this;
             let results = validateCalculateSubmit(self.members);
             clearInvalidForm();
@@ -203,26 +186,20 @@ var app = new Vue({
                         self.results.EmployerDiscounts = round(results.EmployerDiscounts, 2);
                         self.results.AdjustedPeriodPayAmount = round(results.AdjustedPeriodPayAmount, 2);
                         self.results.PerPeriodCosts = round(results.PerPeriodCosts, 2);
+                        self.results = {
+                            EmployeeName: results.EmployeeName,
+                            FamilyMembers:results.Family.Members.length,
+                            AnnualSalary: round(results.AnnualSalary, 2),
+                            AnnualCosts: round(results.AnnualCosts),
+                            EmployerDiscounts: round(results.EmployerDiscounts, 2),
+                            AdjustedPeriodPayAmount: round(results.AdjustedPeriodPayAmount, 2),
+                            PerPeriodCosts: round(results.PerPeriodCosts, 2),
+
+                        }
                     }
                 }
             );
         },
-        clearMember: function () {
-            this.FirstName = '';
-            this.LastName = '';
-            this.DateOfBirth = '';
-            this.IsSpouse = false;
-            this.IsEmployee = false;
-        },
-        isEmployeeChanged: function () {
-            if (this.IsSpouse === true && this.IsEmployee === false) {
-                this.IsSpouse = false;
-            }
-        },
-        isSpouseChanged: function () {
-            if (this.IsSpouse === false && this.IsEmployee === true) {
-                this.IsEmployee = false;
-            }
-        }
-    }
+    },
 })
+

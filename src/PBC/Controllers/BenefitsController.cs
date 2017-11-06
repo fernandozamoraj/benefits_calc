@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using PBC.Repos;
 
-namespace PBC.Controllers
+namespace PBC.App.Controllers
 {
     public class BenefitsController : Controller
     {

@@ -5,7 +5,7 @@ using PBC.App.Models;
 using PBC.App.Services;
 using PBC.Services;
 
-namespace PBC.Controllers
+namespace PBC.App.Controllers
 {
     //secret sauce to configure webapi with structure map https://www.exceptionnotfound.net/setting-up-dependency-injection-in-web-api-with-structuremap/
     public class BenefitsApiController : ApiController
