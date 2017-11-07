@@ -16,9 +16,7 @@ const styles = {
       marginBottom: 16,
       maxWidth: 150
     }    
-  };
-
-
+};
 
 class AddMember extends Component{
 

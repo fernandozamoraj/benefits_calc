@@ -24,7 +24,7 @@ class Member extends Component{
     render() {
         return (
 
-        <ListItem
+        <ListItem 
             disabled={true}
             leftAvatar={
               <Avatar src="https://randomuser.me/api/portraits/men/83.jpg" />
