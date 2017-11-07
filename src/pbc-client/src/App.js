@@ -38,7 +38,7 @@ class App extends Component {
 
   handleAddedMember(member){
     
-        let results = Validator.validateMember(member, []);
+        let results = Validator.validateMember(member, this.state.members);
     
         if(results.isValid){
 

@@ -16,7 +16,7 @@ class Member extends Component{
         
         this.state = {
           name: props.member.FirstName + ' ' + props.member.LastName,
-          role: props.member.IsEmployee ? 'Employee' : (props.member.IsSpouse ? 'Spouse' : ''),
+          role: props.member.IsEmployee ? 'Employee' : (props.member.IsSpouse ? 'Spouse' : 'Dependent'),
           dateOfBirth: props.member.DateOfBirth.toDateString().substr(4)
         };
     }
