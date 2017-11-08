@@ -28,8 +28,7 @@ class App extends Component {
     return (
 
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <div className="App">          
-            
+        <div className="App">   
             <BenefitsApp />
         </div>     
       </MuiThemeProvider>

@@ -23,9 +23,33 @@ namespace PBC.App.Controllers
         }
 
         // GET: api/BenefitsApi
-        public string Get()
+        // This is purely for testing a get
+        // Everything is hardcoded to simply test that
+        // the controller is workin
+        public CalculatedResultsModel Get()
         {
-            return "Not Implemented";
+            return new CalculatedResultsModel
+            {
+                AdjustedPeriodPayAmount = 1,
+                AnnualSalary = 52000,
+                EmployeeName = "John Doe",
+                AnnualCosts = 1000,
+                EmployerDiscounts = 100,
+                Family = new Family
+                {
+                    Members = new List<Person>
+                    {
+                        new Person
+                        {
+                            FirstName = "John",
+                            LastName = "Doe",
+                            DateOfBirth = System.DateTime.Now,
+                            IsEmployee = true,
+                            IsSpouse = false 
+                        }
+                    }
+                }
+            };
         }
 
         // GET: api/BenefitsApi/5
@@ -35,6 +59,13 @@ namespace PBC.App.Controllers
         }
 
         // POST: api/BenefitsApi
+        /// <summary>
+        /// Post performs the calculation.
+        /// </summary>
+        /// <param name="model">a Family instance</param>
+        /// <returns>CalculateResultsModel</returns>
+        /// TODO: This needs to change to return just one object instead of 
+        /// an IEnumerable collection
         public IEnumerable<CalculatedResultsModel> Post([FromBody]Family model)
         {
             CalculationResults results = _calculator.RunCalculations(model, _appConfig);

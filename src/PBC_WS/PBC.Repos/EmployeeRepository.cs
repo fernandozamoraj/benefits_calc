@@ -3,6 +3,11 @@ using PBC.Models;
 
 namespace PBC.Repos
 {
+    /// <summary>
+    /// This is only a simulated employee repository
+    /// In a real application this would use an ORM to
+    /// perfrom CRUD against the back end database.
+    /// </summary>
     public class EmployeeRepository : IEmployeeRepository
     {
         private List<Employee> _employees;

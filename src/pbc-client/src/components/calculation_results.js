@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Router, Route, browserHistory} from 'react-router';
 import PropTypes from 'prop-types';
+import './calculation_results.css';
 
 const styles = {
     block: {

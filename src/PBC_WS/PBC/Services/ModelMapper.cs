@@ -27,18 +27,28 @@ namespace PBC.App.Services
 
         private String getEmployeeName(Family family)
         {
-            var query = from a in family.Members
-                               where a.IsEmployee == true
-                               select a;
-
-            var p = query.First<Person>();
-
-            if (p != null)
+            //It's possible that the family members may not have 
+            //an employee
+            //In that case catch the error and return no name
+            try
             {
-                return p.FirstName + " " + p.LastName;
-            }
+                var query = from a in family.Members
+                            where a.IsEmployee == true
+                            select a;
 
-            return "<NO NAME>";
+                var p = query.First<Person>();
+
+                if (p != null)
+                {
+                    return p.FirstName + " " + p.LastName;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        
+            return "<NO NAME - No Employee In Family - Invalid Results>";
         }
     }
 }

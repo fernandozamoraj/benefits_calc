@@ -1,7 +1,7 @@
 ﻿@model PBC.Models.Family
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Web Api for Benefits Calculator";
 }
 
 <style type="text/css">
@@ -16,32 +16,50 @@
 
 <div id="calc-app">
     <div class="row">
-        <!--Add member form-->
-        <addmember-component members.sync="members"></addmember-component>
-        <!--End of add member form-->
-        <!--Family Results Section-->
-        <calculated-results-component v-on:calculate="runCalculations"></calculated-results-component>
-        <!--End of Family Results Section-->
-        <!--Family Members Section-->
-        <div class="col s6 m6">
-            <div class="row">
-                <div class="col s12">
-                    <ul class="collection" style="border: none;" v-for="member in members">
-                        <li class="collection-item avatar blue-grey lighten-5" style="margin: 5px; border-radius: 10px;">
-                            <span class="bold" data-bind="text: userTag"></span><br />
-                            <p>
-                                <span class="blue-grey-text lighten-3">Name:</span> <span class="grey-text lighten-2">{{member.FullName}}</span><br>
-                                <span class="blue-grey-text lighten-3">DOB:</span> <span class="grey-text lighten-2">{{member.DateOfBirth}}</span><br>
-                                <span class="blue-grey-text lighten-3">Relationshp:</span> <span class="grey-text lighten-2">{{member.Role}}</span><br>
+        <p>
+            Not much to see here.  This is only the back end for a calculations call.
+            Call  this application by using POST request to call api/benefitsapi/.
+            The call requires a Family object which you can find in the project PBC.Models.
+        </p>
+        <p>
+            Click on the link below to access the GET method of the BenefitsApiController
+            <a href="/api/benefitsapi">/api/benefitsapi</a>
+        </p>
+        <p>
+            There isn't much to see in this app.  Originally this app was
+            a Vue.js application.  I decided to demolition that effort after
+            so many different attempts and so many different issues trying to
+            make the Vue application modular.
+            Out of the box Vuejs works like a charm for a monolithic SPA.
+            However, once you try to break the application apart into components
+            it causes a lot of headaches because... it is really hard to figure 
+            how to make things work correctly.
 
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="material-icons icon-black">person</i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--End of Family Members Section-->
+        </p>
+        <p>
+            After many hours spent trying to break it apart I simply decided to 
+            to take the course on react from Udemy.  After a about three hours
+            of the video I was able to pull together the client using react.
+
+        </p>
+        <p>
+            React proved to be a lot better at handling a modular front end application.
+        </p>
+        <p>
+            So this application only serves as the back end api server.
+            You can find the only one API method for performing the calculations in the
+            BenefitsApiController in PBC/COntrollers.
+            I did not clean out all the dead code only because one day I may decided to
+            revisit it.
+            The VUE JS code can be found in the Scripts folder.
+        </p>
+        <p>
+            The react application will work as is.  However in order for it talk to this as 
+            a server you must change the port to 3001 for this application and run it on the
+            same host as the react app.
+            To change the PORT right click on the PBC project and select properties. Then select
+            Web. In the Web tab select the project URL and change the port to 3001.
+        </p>
     </div>
 </div>
 
