@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import Member from './member'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import Member from './member';
 import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
 
@@ -15,12 +16,14 @@ class MemberList extends Component{
     }    
 
     render() {
+        let i = 1;
         return (
             <Paper style={style}>
                 <List>
                     {
-                        this.props.familyMembers.map( member =>{
-                            return <Member member={member}/>;
+                       this.props.members.map( member =>{
+                            i++;
+                            return <Member member={member} key={i}/>;
                         })
                     }
                 </List>
@@ -28,5 +31,6 @@ class MemberList extends Component{
         );
     }
 }
+
 
 export default MemberList;

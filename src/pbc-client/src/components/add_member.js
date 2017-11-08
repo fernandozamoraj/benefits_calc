@@ -4,7 +4,14 @@ import Paper from 'material-ui/Paper';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
+import {teal800, teal400, teal600} from 'material-ui/styles/colors';
+import MemberList from './member_list';
 
+const iconStyles = {
+    marginRight: 10,
+};
 
 const styles = {
     block: {
@@ -27,8 +34,18 @@ class AddMember extends Component{
             LastName: '',
             DateOfBirth: new Date(1995, 1, 1, 12, 0, 0),
             IsEmployee: false,
-            IsSpouse: false
+            IsSpouse: false,
         }
+    }
+
+    clearState(){
+        this.setState( {
+            FirstName: '',
+            LastName: '',
+            DateOfBirth: new Date(1995, 1, 1, 12, 0, 0),
+            IsEmployee: false,
+            IsSpouse: false,
+        });
     }
 
     updateEmployeeCheck(){
@@ -41,7 +58,7 @@ class AddMember extends Component{
               IsEmployee: newState,
               IsSpouse: false
             };
-          });
+        });
     }
 
     updateSpouseCheck(){        
@@ -60,6 +77,10 @@ class AddMember extends Component{
         this.setState({
             FirstName: e.target.value
         });
+
+        if(this.state.FirstName.length > 0) {
+            this.props.closeDrawer()
+        }
     }
 
     onLastNameChange(e){
@@ -67,15 +88,26 @@ class AddMember extends Component{
         this.setState({
             LastName: e.target.value
         });
+
+        if(this.state.LastName.length > 0) {
+            this.props.closeDrawer()
+        }
     }
 
     addMemberClick(e){
         this.props.onAddedMember(Object.assign({}, this.state));
+        this.clearState();
+    }
+
+    calculateClick(e){
+        this.props.onRunCalculations(Object.assign({}, this.state));
     }
 
     getDefaultDate(){
         return new Date(1995, 1, 1, 12, 0, 0);
     }
+
+    handleToggle = () => this.setState({open: !this.state.open});
 
     render() {
 
@@ -86,8 +118,8 @@ class AddMember extends Component{
                 <div className="row" id="invalid-message" data-validation-id="0">
 
                 </div>
-                <TextField hintText="First Name" id="first-name" type="text" onChange={this.onFirstNameChange.bind(this)} className="validate" required />
-                <TextField hintText="Last Name" id="last-name" type="text" onChange={this.onLastNameChange.bind(this)} className="validate" required/>
+                <TextField value={this.state.FirstName} hintText="First Name" id="first-name" type="text" onChange={this.onFirstNameChange.bind(this)} className="validate" required />
+                <TextField value={this.state.LastName}hintText="Last Name" id="last-name" type="text" onChange={this.onLastNameChange.bind(this)} className="validate" required/>
 
                 <DatePicker hintText="01/01/1972" defaultDate={thisDefaultDate} id="date-of-birth" type="text" className="validate" required/>
                 
@@ -109,8 +141,14 @@ class AddMember extends Component{
                         />
                 </Paper>    
 
-                <RaisedButton id="btn-add-member" label="Add Member" onClick={this.addMemberClick.bind(this)}/>
-
+                <RaisedButton id="btn-add-member" label="Add Member" onClick={this.addMemberClick.bind(this)} >
+                    <ContentAdd style={iconStyles} color={teal400} />
+                </RaisedButton>
+    
+                <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
+                    <ActionAccountBalance style={iconStyles} color={teal400} />
+                </RaisedButton>
+                <MemberList members={this.props.members}/> 
             </Paper>
         );
     }

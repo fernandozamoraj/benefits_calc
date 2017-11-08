@@ -1,6 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
+import randomImage from '../util/random_image';
 
 const style = {
     margin: 20,
@@ -11,33 +13,41 @@ const style = {
 
 class Member extends Component{
 
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-          name: props.member.FirstName + ' ' + props.member.LastName,
-          role: props.member.IsEmployee ? 'Employee' : (props.member.IsSpouse ? 'Spouse' : 'Dependent'),
-          dateOfBirth: props.member.DateOfBirth.toDateString().substr(4)
-        };
-    }
-    
     render() {
+
+        const member = this.props.member;
+        const name = member.FirstName + ' ' + member.LastName;
+        const role = member.IsEmployee ? 'Employee' : (member.IsSpouse ? 'Spouse' : 'Dependent');
+        const dateOfBirth = member.DateOfBirth.toDateString().substr(4);
+        const randomImageUrl = randomImage.get();
+
         return (
+            <ListItem 
+                disabled={true}
+                rightAvatar={
+                    <Avatar src={randomImageUrl} />
+                }
+                style={style}
+                >
 
-        <ListItem 
-            disabled={true}
-            leftAvatar={
-              <Avatar src="https://randomuser.me/api/portraits/men/83.jpg" />
-            }
-            style={style}
-            >
-            <p>Name: {this.state.name}</p>
-            <p>Role: {this.state.role}</p>
-            <p>DOB: {this.state.dateOfBirth}</p>
-
-        </ListItem>          
+                <ul className="member-card">
+                    <li>Name: {name}</li>
+                    <li>Role: {role}</li>
+                    <li>DOB: {dateOfBirth}</li>
+                </ul>
+            </ListItem>          
 
         );
+    }
+}
+
+Member.defaultProps = {
+    member: {
+        FirstName: '', 
+        LastName: '', 
+        IsEmployee: false, 
+        IsSpouse: false, 
+        dateOfBirth: new Date(1,1,200).toDateString().substr(4)
     }
 }
 

@@ -4,9 +4,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import AppBar from 'material-ui/AppBar';
 import './App.css';
-import AddMember from './components/add_member'
-import Validator from './util/validate_member'
-import MemberList from './components/member_list'
+import AddMember from './components/add_member';
+import Validator from './util/validate_member';
+import MemberList from './components/member_list';
+import BenefitsApp from './components/benefits_app';
 
 
 const muiTheme = getMuiTheme({
@@ -26,41 +27,15 @@ class App extends Component {
   render() {
     return (
 
-        <div className="App">
-          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-            <AppBar title="Benefits Calculator" />
-          </MuiThemeProvider>
-          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-            <AddMember onAddedMember={this.handleAddedMember.bind(this)}></AddMember>
-          </MuiThemeProvider>
-          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-            <MemberList familyMembers={this.state.members}/>
-          </MuiThemeProvider>
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <div className="App">          
+            
+            <BenefitsApp />
         </div>     
+      </MuiThemeProvider>
       
     );
   }
-
-  handleAddedMember(member){
-    
-        let results = Validator.validateMember(member, this.state.members);
-    
-        if(results.isValid){
-
-          let newMembers = this.state.members.slice();
-          newMembers.push(member);
-
-          this.setState(oldState => {
-            return {
-              members: newMembers
-            }
-          });
-        }
-        else{
-          console.log('Member is not valid');
-          console.log(results);
-        }
-      }
 }
 
 export default App;
