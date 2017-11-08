@@ -5,7 +5,25 @@ let isValidDate = function(d){
 }
 
 let Validator = {
-       
+    
+    validateEmployeeExists: function(members){
+
+        let results = {};
+        results.isValid = true;
+
+        for (let i = 0; i < members.length; i++)             {
+            if (members[i].IsEmployee === true) {
+                return results;
+                break;
+            }
+        }
+
+        results.field = 4;
+        results.isValid = false;
+        results.message = "There is no employee in this collection";
+        return results;        
+    },
+
     validateMember: function(candidateMember, members) {
         let results = {};
         results.isValid = true;

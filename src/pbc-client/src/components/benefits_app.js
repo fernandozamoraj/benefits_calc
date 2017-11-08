@@ -44,6 +44,7 @@ class BenefitsApp extends Component{
     
         if(results.isValid){
     
+          //slice array to avoid modify the original array
           let newMembers = this.state.members.slice();
           newMembers.push(member);
     
@@ -77,21 +78,37 @@ class BenefitsApp extends Component{
     handleRunCalculations(){
         let self = this;
         console.log("Running calculations...");
-        this.setState({open: true});
+        
         console.log(this.state.members);
 
-        axios.post('api/benefitsApi/', {
-             Members: self.state.members
-        })
-        .then( function(data){
-            console.log('Data returned from post');
-            console.log(data);
-            self.setResults(data.data[0]);
-        })
-        .catch(function(err){
-            console.log('Error from post to benefitsApi')
-            console.log(err);
-        })
+        let results = Validator.validateEmployeeExists(this.state.members);
+
+        if(results.isValid) {
+            axios.post('api/benefitsApi/', {
+                Members: self.state.members
+           })
+           .then( function(data){
+               console.log('Data returned from post');
+               console.log(data);
+               self.setResults(data.data[0]);
+               this.setState({open: true});
+           })
+           .catch(function(err){
+               //TODO: change these alerts to something more aesthetic
+               alert("Error trying to request calculations from server");
+               alert(err);
+               console.log('Error from post to benefitsApi');
+               console.log(err);
+           })
+        }
+        else{
+            
+            //TODO: update GUI with message that 
+            //request cannot be processed
+            //TODO: change alert to validation on form
+            alert(results.message);
+            console.log(results.message);
+        }
     }
 }
 
