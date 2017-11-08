@@ -13,19 +13,24 @@ const style = {
 
 class Member extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = { randomImageUrl: randomImage.get() };
+    }
+
     render() {
 
         const member = this.props.member;
         const name = member.FirstName + ' ' + member.LastName;
         const role = member.IsEmployee ? 'Employee' : (member.IsSpouse ? 'Spouse' : 'Dependent');
         const dateOfBirth = member.DateOfBirth.toDateString().substr(4);
-        const randomImageUrl = randomImage.get();
+        const imageUrl = this.state.randomImageUrl;
 
         return (
             <ListItem 
                 disabled={true}
                 rightAvatar={
-                    <Avatar src={randomImageUrl} />
+                    <Avatar src={imageUrl} />
                 }
                 style={style}
                 >

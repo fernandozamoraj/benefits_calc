@@ -91,7 +91,7 @@ class BenefitsApp extends Component{
                console.log('Data returned from post');
                console.log(data);
                self.setResults(data.data[0]);
-               this.setState({open: true});
+               self.setState({open: true});
            })
            .catch(function(err){
                //TODO: change these alerts to something more aesthetic
