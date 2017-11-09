@@ -58,6 +58,7 @@
         <h3>Calling the service using a POST request</h3>
         <p>Several client side services exist for calling the service.  Calling with your choice of AJAX library will be very similar.</p>
         <p>Here is an example with axios</p>
+        <p>At least one of the members must be an employee</p>
 
         <pre>
 
@@ -68,7 +69,7 @@
                       FirstName: 'Bart',
                       LastName: 'Simpson',
                       DateOfBirth: new Date(1995, 1, 1, 12, 0, 0),
-                      IsEmployee: false,
+                      IsEmployee: true,
                       IsSpouse: false,
                   }
             ];

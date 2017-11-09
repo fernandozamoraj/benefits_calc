@@ -80,18 +80,18 @@ class BenefitsApp extends Component{
             //for this project to that (e.g. "proxy": "http://localhost:3002")
             axios.post('api/benefitsApi/', {
                 Members: this.state.members
-           })
-           .then((data) => {
-               this.setResults(data.data[0]);
-               this.setState({open: true});
-           })
-           .catch((err) => {
-               //TODO: change these alerts to something more aesthetic
-               alert("Error trying to request calculations from server");
-               alert(err);
-               console.log('Error from post to benefitsApi');
-               console.log(err);
-           })
+            })
+            .then((data) => {
+                this.setResults(data.data);
+                this.setState({open: true});
+            })
+            .catch((err) => {
+                //TODO: change these alerts to something more aesthetic
+                alert("Error trying to request calculations from server");
+                alert(err);
+                console.log('Error from post to benefitsApi');
+                console.log(err);
+            })
         }
         else{            
             //TODO: update GUI with message that 

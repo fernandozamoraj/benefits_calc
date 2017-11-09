@@ -30,11 +30,11 @@ class CalculationResults extends Component{
             <div>
                 <ul className="results">
                     <li>Name: {results.EmployeeName}</li>
-                    <li>Family Size: {results.FamilySize}</li>
+                    <li>Family Size: {results.FamilyMembers}</li>
                     <li>Salary: {results.AnnualSalary}</li>   
                     <li>Annual Costs: {results.AnnualCosts}</li>
                     <li>Adjusted Pay/Period: {results.AdjustedPeriodPayAmount}</li>
-                    <li>Pay Perdio Costs: {results.PerPeriodCosts}</li>
+                    <li>Pay Period Costs: {results.PerPeriodCosts}</li>
                     <li>Discounts:  {results.EmployerDiscounts}</li>
                 </ul>
             </div>

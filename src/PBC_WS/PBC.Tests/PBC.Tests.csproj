@@ -38,7 +38,9 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +81,12 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="MapperTests.cs" />
+    <Compile Include="WhenFamilyHasMoreThanOneEmployee.cs" />
+    <Compile Include="WhenFamilyContainsInvalidMembers.cs" />
+    <Compile Include="WhenFamilyContainsMultipleMembersAllValid.cs" />
+    <Compile Include="WhenFamilyContainsZeroMembers.cs" />
+    <Compile Include="WhenFamilyDoesNotContainEmployee.cs" />
+    <Compile Include="WhenFamilyIsValidWithOnlyEmployee.cs" />
     <Compile Include="WhenOneEmployeeNameStartsWithA.cs" />
     <Compile Include="WhenOneEmployeeWith2Dependants.cs" />
     <Compile Include="WhenOnlyEmployee.cs" />

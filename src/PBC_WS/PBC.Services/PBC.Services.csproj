@@ -41,9 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="FamilyValidator.cs" />
     <Compile Include="IAppConfiguration.cs" />
     <Compile Include="ICalculator.cs" />
+    <Compile Include="IFamilyValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PBC.Models\PBC.Models.csproj">

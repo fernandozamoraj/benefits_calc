@@ -34,8 +34,7 @@ namespace PBC.Tests
                  }
               },
 
-            };
-            
+            };            
 
             Calculator calculator = new Calculator();
             _appConfig = new AppConfiguration();
@@ -46,13 +45,13 @@ namespace PBC.Tests
         [TestMethod]
         public void AnnualCostsShouldBe1000()
         {
-            Assert.AreEqual(2000, _calculation.AnnualCosts, "Annual salary for one employee + 2 dependents");
+            Assert.AreEqual(2000, _calculation.AnnualCosts, "Gross Annual costs for one employee + 2 dependents");
         }
 
         [TestMethod]
-        public void AdjustedPeriodAmountForOneEmmpoyee()
+        public void AdjustedPeriodAmountForOneEmployee()
         {
-            decimal adjustedPeriodAmount = ((_appConfig.AnnualSalary - 2000) - 200) / 26;
+            decimal adjustedPeriodAmount = ((_appConfig.AnnualSalary - 2000) + 200) / 26;
             Assert.AreEqual(adjustedPeriodAmount, _calculation.AdjustedPeriodAmount, "Adjusted Period Amount for one employee");
         }
 
