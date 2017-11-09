@@ -7,7 +7,7 @@
 1. Download or clone this repository.
 2. Navigate to /benefits_calc/src/PBC_WS/ rebuild the solution and run
 3. Navigate to /benefits_calc/src/pbc-client/src/ from the command line
-4. run the command `npm update` to update all dependencies in the project
+4. run the command `npm install` to update all dependencies in the project
 5. run the command `npm start` to start the application
 
 ### Running the application
@@ -143,12 +143,18 @@ The application also contains some utility source files to provide support for t
 
 The application is intuitive enough in my opinion and therefore it should be easy enough to run.
 
-# Frameworks and Third Party Libraries in this project
+# Languages, Frameworks and Third Party Libraries in this project
 
-Structure Map
-MVC .Net
+#### C# and .Net
+* C#
+* [Structure Map](http://structuremap.github.io/)
+* [MVC .Net](https://www.asp.net/mvc)
 
-React
-Material-ui
-axios
+#### Client - Front End
+* HTML
+* CSS
+* JavaScript
+* [ReactJS](https://reactjs.org/)
+* [Material-ui](http://www.material-ui.com)
+* [axios](https://www.npmjs.com/package/axios)
 
