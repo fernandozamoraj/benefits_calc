@@ -1,4 +1,5 @@
 ﻿using PBC.Models;
+using System.Collections.Generic;
 
 namespace PBC.Repos
 {
@@ -11,8 +12,9 @@ namespace PBC.Repos
     /// It is no longer used since I removed the front end from this
     /// solution and moved the front end logic to the react application.
     /// </summary>
-    public interface IEmployeeRepository
+    public interface IFamilyRepository
     {
-        System.Collections.Generic.List<Employee> GetAll();
+       List<Person> GetAll();
+        Person Save(Person p);
     }
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import uuidv1 from 'uuid/v1';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
@@ -14,7 +15,9 @@ import calculator from '../util/calculator';
 import Paper from 'material-ui/Paper';
 import {teal400} from 'material-ui/styles/colors';
 import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import '../gridiculous.css';
+import '../App.css';
 
 const iconStyles = {
     marginRight: 10,
@@ -47,33 +50,40 @@ class BenefitsApp extends Component{
         return (
             <div>
                 <AppBar title="Benefits Application" />
-                {messageBox}
-                <div className="row">
-                    <RaisedButton label="Add Family Member" onClick={this.addMemberClick.bind(this)}>
-                        <ActionAccountBalance style={iconStyles} color={teal400} />
-                    </RaisedButton>
-                    <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
-                            <ActionAccountBalance style={iconStyles} color={teal400} />
-                    </RaisedButton>
-                </div>
-                <div className="row">
-                    <div className="c4">
-                        <MemberList members={this.state.members}/>
+                <div className="sub-container">
+
+                    {messageBox}
+                    <div className="row">
+                        <div className="c3">
+                            <RaisedButton label="Add Family Member" onClick={this.addMemberClick.bind(this)}>
+                                <ContentAdd style={iconStyles} color={teal400} />
+                            </RaisedButton>
+                        </div>
+                        <div className="c3">
+                            <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
+                                    <ActionAccountBalance style={iconStyles} color={teal400} />
+                            </RaisedButton>
+                        </div>
                     </div>
-                    <div className="c4">
-                        <Paper styles={styles.block}>
-                            <CalculationResults results={this.state.results} />
-                        </Paper>
+                    <div className="row">
+                        <div className="c8">
+                            <MemberList members={this.state.members}/>
+                        </div>
+                        <div className="c4">
+                            <Paper styles={styles.block}>
+                                <CalculationResults results={this.state.results} />
+                            </Paper>
+                        </div>
                     </div>
+                    <Drawer  width={500} openSecondary={true} open={this.state.open} >
+                        <AddMember 
+                            onAddedMember={this.handleAddedMember.bind(this)} 
+                            onRunCalculations={this.handleRunCalculations.bind(this)}
+                            closeDrawer={this.handleCloseDrawer.bind(this)}
+                            members={this.state.members} />
+                    </Drawer>
                 </div>
-                <Drawer  width={500} openSecondary={true} open={this.state.open} >
-                    <AddMember 
-                        onAddedMember={this.handleAddedMember.bind(this)} 
-                        onRunCalculations={this.handleRunCalculations.bind(this)}
-                        closeDrawer={this.handleCloseDrawer.bind(this)}
-                        members={this.state.members} />
-                </Drawer>
-            </div>
+            </div>  
         );
     }
 
@@ -151,14 +161,30 @@ class BenefitsApp extends Component{
     handleAddedMember(member){
         const results = Validator.validateMember(member, this.state.members);
         if(results.isValid){
-          //slice array to avoid modify the original array
-          let newMembers = this.state.members.slice();
-          newMembers.push(member);
-          this.setState( (oldState) => {
-            return {
-              members: newMembers
-            }
-          });
+            member.Id = uuidv1();       
+
+            axios.post('api/familyMember/', member)
+            .then((data) => {
+
+                console.log(data);
+                console.log(data.data);
+                //slice array to avoid modify the original array
+                let newMembers = this.state.members.slice();
+                let newMember = data.data;
+                //Date comes back from the server as string
+                newMember.DateOfBirth = new Date(newMember.DateOfBirth);
+                newMembers.push(data.data);
+                this.setState( (oldState) => {
+                return {
+                    members: newMembers
+                }
+                });
+            })
+            .catch((err) => {
+                this.handleOpenDialog("Error from POST... running calculations locally.");
+                const data = calculator.runCalculations({ Members: this.state.members});
+                this.setResults(data);
+            })
         } else {
             this.handleOpenDialog(results.message);
         }        

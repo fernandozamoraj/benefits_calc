@@ -5,6 +5,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentBackspace from 'material-ui/svg-icons/content/backspace';
 import './styles/add_member.css';
 import {teal400} from 'material-ui/styles/colors';
 
@@ -25,7 +26,8 @@ const styles = {
       maxWidth: 150
     },
     main:{
-        height: '600px'
+        height: 1200,
+        paddingBottom: 400, 
     }
 };
 
@@ -78,10 +80,24 @@ class AddMember extends Component{
                     >
                         <ContentAdd style={iconStyles} color={teal400} />
                     </RaisedButton>
+                    <RaisedButton id="btn-close" label="Cancel" onClick={this.btnCloseClick.bind(this)} 
+                        style={{
+                            margin: '10px',
+                            color: '#ff0000'
+                        }} 
+                    >
+                        <ContentBackspace style={iconStyles} color={teal400} />
+                    </RaisedButton>
                 </Paper>
+                <Paper>
 
+                </Paper>
             </Paper>
         );
+    }
+
+    btnCloseClick(e){
+       this.props.closeDrawer()
     }
 
     /**
