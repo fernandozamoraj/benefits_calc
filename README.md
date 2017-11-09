@@ -1,32 +1,29 @@
 # benefitscalc
-Demo Challenge App Benefits Calculator
 
-Downloading, Installing and Running
+# Demo Challenge App Benefits Calculator
 
-Download or clone this repository.
-Navigate to /benefits_calc/src/PBC_WS/ rebuild the solution and run
-Navigate to /benefits_calc/src/pbc-client/src/ from the command line
-run the command npm update to update all dependencies in the project
-run the command npm start to start the application
+### Downloading, Installing and Running
 
-Running the application
+1. Download or clone this repository.
+2. Navigate to /benefits_calc/src/PBC_WS/ rebuild the solution and run
+3. Navigate to /benefits_calc/src/pbc-client/src/ from the command line
+4. run the command `npm update` to update all dependencies in the project
+5. run the command `npm start` to start the application
 
-The client application will run on localhost:3000.
+### Running the application
+
+The client application runs on localhost:3000.
 The application allows you to perform two functions
-     Add a member
-     Run the calculations
+   * Add a member
+   * Run the calculations
 Validation requirements
-     At a minimum the application requires you to enter an employee member in order to
+   * At a minimum the application requires you to enter an employee member in order to
      perform the calculations
 
 
+# The benefits calculator consists of two projects.
 
-
-
-
-The benefits calculator consits of two projects.
-
-The Benefits Back End
+### The Benefits Calculator Back End
 
 The first project is the back end, an MVC .NET web api project. The project
 is located in the folder /benefits_calc/src/PBC_WS/.  You can open the project
@@ -38,7 +35,7 @@ off, calculations sometimes may contain propietary algorithms.  That's not neces
 the case in this demo. The second idea is that it allows me to demonstrate the
 architecture for a MVC .net project.
 
-Architecture behind the back end
+### Architecture behind the back end
 
 The architecture behind the back end promotes an application that separates concerns.
 Some of the concepts are rooted in the ideas originated by Eric Evans in his Book
@@ -46,11 +43,12 @@ Domain Driven Design.  The architecture divides objects into different categorie
 as Services, Entities, Aggregates, Repositories.
 
 This approach helps further promote SOLID principles such as 
-Single Responsibility, 
-Open Closed Principle
-Liskov Substitution Principle,
-Interface Segregation,
-Dependency Inversion
+
+* Single Responsibility, 
+* Open Closed Principle
+* Liskov Substitution Principle,
+* Interface Segregation,
+* Dependency Inversion
 
 These principles originate from patterns that provide better reliability in terms of better 
 cohesion and reduced coupling.  This approach makes the components more reliable because
@@ -65,14 +63,14 @@ Writing code under these principles and guidelines, makes the software more test
 of the big benefits of using a Test Driven Development approach is that it forces the code
 to have better structure.
 
-The Projects in the application
+# The Projects in the application
 
 This project is broken down into several projects.  For a project this small this may 
 be overkill.  However in a real world project the number of code elements would grow
 significantly and then it would become extremelly important to have the projects neatly
 organized into appropriate collections of assemblies, folders and functional systems.
 
-The Main Application
+### The Main Application
 
 The main application is the PBC project.  This application consists of those items
 that are necessary for the application to function.  The controllers MVC and Web Api controllers
@@ -108,7 +106,7 @@ type structure.  However, since data access is such a common and distinct operat
 a typical line of business application, they deserve their own assembly.
 
 
-The Benefits Calculator Front End
+### The Benefits Calculator Front End
 
 The second project is a react application.  That project is located in
 /benefits_calc/src/pbc-client/. Since this project is node application, you
@@ -120,19 +118,21 @@ The application consists of several GUI components.
 
 These components are
 
+```
 App
   |----BenefitsApp
        |----AddMember
        |    |----MembersList
        |         |----Member
        |----CalculationResults 
+```
 
 The application also contains some utility source files to provide support for the components
 
-app_config.js - Holds settings to to assis the calculator such as the pay, discount amount, etc.
-calculator.js - This is the calculator on the client side. It serves the purpose of computing the
+`app_config.js` - Holds settings to to assis the calculator such as the pay, discount amount, etc.
+`calculator.js` - This is the calculator on the client side. It serves the purpose of computing the
                 caclculations when connection to the Web Services fails.
-random_image.js - Generates a radnom URL to a randomuser.me image.  
-round_money.js - rounds numbers to the specified decimal point
-validate_member.js - This file contains logic to provide validation when adding members from the GUI.
+`random_image.js` - Generates a radnom URL to a randomuser.me image.  
+`round_money.js` - rounds numbers to the specified decimal point
+`validate_member.js` - This file contains logic to provide validation when adding members from the GUI.
 
