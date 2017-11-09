@@ -15,6 +15,16 @@ namespace PBC.App.Controllers
         ICalculator _calculator;
         IModelMapper _modelMapper;
 
+        /// <summary>
+        /// BenefitsApiController - This is a simple controller to perform the calculations.
+        /// This was the chosen method for performing calculations to demonstrate
+        /// a .Net application.
+        /// The dependencies for this project are injected with the help of the 
+        /// IOC Framework StructureMap
+        /// </summary>
+        /// <param name="appConfig"></param>
+        /// <param name="calculator"></param>
+        /// <param name="modelMapper"></param>
         public BenefitsApiController(IAppConfiguration appConfig, ICalculator calculator, IModelMapper modelMapper)
         {
             _calculator = calculator;

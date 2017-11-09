@@ -12,54 +12,89 @@
     }
 </style>
 
-<h2>Create</h2>
+<h2>Benefits Calculator Web Services</h2>
 
 <div id="calc-app">
     <div class="row">
         <p>
-            Not much to see here.  This is only the back end for a calculations call.
-            Call  this application by using POST request to call api/benefitsapi/.
-            The call requires a Family object which you can find in the project PBC.Models.
+            This is the stand alone page for the Web Services Controller.
+            The webservice has only one post method.  The method is outlined below.
+            The react-application in this same Git repository has implements calling
+            the POST method in the file src/components/benefits_app.js.
         </p>
-        <p>
-            Click on the link below to access the GET method of the BenefitsApiController
-            <a href="/api/benefitsapi">/api/benefitsapi</a>
-        </p>
-        <p>
-            There isn't much to see in this app.  Originally this app was
-            a Vue.js application.  I decided to demolition that effort after
-            so many different attempts and so many different issues trying to
-            make the Vue application modular.
-            Out of the box Vuejs works like a charm for a monolithic SPA.
-            However, once you try to break the application apart into components
-            it causes a lot of headaches because... it is really hard to figure 
-            how to make things work correctly.
 
-        </p>
-        <p>
-            After many hours spent trying to break it apart I simply decided to 
-            to take the course on react from Udemy.  After a about three hours
-            of the video I was able to pull together the client using react.
+        <h3>The BenefitsApiController</h3>
+        <pre>
+            using System.Collections.Generic;
+            using System.Web.Http;
+            using PBC.Models;
+            using PBC.App.Models;
+            using PBC.App.Services;
+            using PBC.Services;
 
-        </p>
-        <p>
-            React proved to be a lot better at handling a modular front end application.
-        </p>
-        <p>
-            So this application only serves as the back end api server.
-            You can find the only one API method for performing the calculations in the
-            BenefitsApiController in PBC/COntrollers.
-            I did not clean out all the dead code only because one day I may decided to
-            revisit it.
-            The VUE JS code can be found in the Scripts folder.
-        </p>
-        <p>
-            The react application will work as is.  However in order for it talk to this as 
-            a server you must change the port to 3001 for this application and run it on the
-            same host as the react app.
-            To change the PORT right click on the PBC project and select properties. Then select
-            Web. In the Web tab select the project URL and change the port to 3001.
-        </p>
+            namespace PBC.App.Controllers
+            {
+                public class BenefitsApiController : ApiController
+                {
+                    IAppConfiguration _appConfig;
+                    ICalculator _calculator;
+                    IModelMapper _modelMapper;
+                    public BenefitsApiController(IAppConfiguration appConfig, ICalculator calculator, IModelMapper modelMapper)
+                    {
+                        _calculator = calculator;
+                        _appConfig = appConfig;
+                        _modelMapper = modelMapper;
+                    }
+                   
+                    public IEnumerable&lt;CalculatedResultsModel&gt; Post([FromBody]Family model)
+                    {
+                        CalculationResults results = _calculator.RunCalculations(model, _appConfig);
+                        CalculatedResultsModel resultsModel =  _modelMapper.MapToResults(results);
+                        return new List&lt;CalculatedResultsModel&gt; { resultsModel };
+                    }
+                }
+            }
+        </pre>
+        <h3>Calling the service using a POST request</h3>
+        <p>Several client side services exist for calling the service.  Calling with your choice of AJAX library will be very similar.</p>
+        <p>Here is an example with axios</p>
+
+        <pre>
+
+            import axios from 'axios';
+
+            let members = [ 
+                  {
+                      FirstName: 'Bart',
+                      LastName: 'Simpson',
+                      DateOfBirth: new Date(1995, 1, 1, 12, 0, 0),
+                      IsEmployee: false,
+                      IsSpouse: false,
+                  }
+            ];
+
+            axios.post('api/benefitsApi/', {
+                Members: members
+            })
+            .then((data) => {
+                console.log(data.data[0]);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        </pre>
+        <h3>Running the Calculator</h3>
+        
+        <ol>
+            <li>Open the command line</li>
+            <li>Navigate to <span style="color:blue; font-weight: bold;">\benefits_calc\src\pbc-client</span> </li>
+            <li>run the command <span style="color:blue; font-weight: bold;">*npm update</span> to update the dependencies</li>
+            <li>The application should open in your browser</li>
+        </ol>
+        <p>*If you don't have nodejs, you can download it at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></p>
+
+        <p>That is all there is to it. The calculator application is self explanatory. You simply add members and the run the calucation process.</p>
+
     </div>
 </div>
 
