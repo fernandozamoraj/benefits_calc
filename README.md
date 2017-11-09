@@ -16,7 +16,8 @@ The client application runs on localhost:3000.
 The application allows you to perform two functions
    * Add a member
    * Run the calculations
-Validation requirements
+
+###### Validation requirements
    * At a minimum the application requires you to enter an employee member in order to
      perform the calculations
 
