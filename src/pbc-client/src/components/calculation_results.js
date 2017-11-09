@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
-import {Router, Route, browserHistory} from 'react-router';
-import PropTypes from 'prop-types';
+import {
+    Table,
+    TableBody,
+    TableRow,
+    TableRowColumn,
+  } from 'material-ui/Table';
+
 import './calculation_results.css';
 
-const styles = {
-    block: {
-      maxWidth: 450,
-      marginLeft: 250,
-      padding: 50
-    },
-    checkbox: {
-      marginBottom: 16,
-      maxWidth: 150
-    }    
-};
-
+/**
+ * CalculationResults - This is the component to display
+ * the CalculationResults
+ */
 class CalculationResults extends Component{
 
     constructor(props) {
@@ -27,17 +24,38 @@ class CalculationResults extends Component{
     render(){
         const results = this.props.results;
         return (
-            <div>
-                <ul className="results">
-                    <li>Name: {results.EmployeeName}</li>
-                    <li>Family Size: {results.FamilyMembers}</li>
-                    <li>Salary: {results.AnnualSalary}</li>   
-                    <li>Annual Costs: {results.AnnualCosts}</li>
-                    <li>Adjusted Pay/Period: {results.AdjustedPeriodPayAmount}</li>
-                    <li>Pay Period Costs: {results.PerPeriodCosts}</li>
-                    <li>Discounts:  {results.EmployerDiscounts}</li>
-                </ul>
-            </div>
+            <Table selectable={false}>
+                <TableBody displayRowCheckbox={false}>
+                    <TableRow>
+                        <TableRowColumn>Name:</TableRowColumn>
+                        <TableRowColumn>{results.EmployeeName}</TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowColumn>Family Size:</TableRowColumn>
+                        <TableRowColumn> {results.FamilyMembers}</TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowColumn>Salary:</TableRowColumn>
+                        <TableRowColumn>{results.AnnualSalary}</TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowColumn>Annual Costs:</TableRowColumn>
+                        <TableRowColumn>{results.AnnualCosts}</TableRowColumn>
+                     </TableRow>
+                    <TableRow>
+                        <TableRowColumn>Discount:</TableRowColumn>
+                        <TableRowColumn>{results.EmployerDiscounts}</TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                    <TableRowColumn>Bi-weekly Costs</TableRowColumn>
+                        <TableRowColumn>{results.PerPeriodCosts}</TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowColumn>Bi-weekly Pay</TableRowColumn>
+                        <TableRowColumn>{results.AdjustedPeriodPayAmount}</TableRowColumn>
+                    </TableRow>
+                </TableBody>
+            </Table>
         );
     }
 }

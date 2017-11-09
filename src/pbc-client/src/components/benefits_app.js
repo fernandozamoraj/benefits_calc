@@ -1,30 +1,40 @@
 import React, {Component} from 'react';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
 import Validator from '../util/validate_member';
 import AddMember from './add_member';
-import MemberList from './member_list';
 import CalculationResults from './calculation_results';
 import round from '../util/round_money';
+import calculator from '../util/calculator';
 
+/**
+ * BenefitsApp - Top level component for the benefits application
+ */
 class BenefitsApp extends Component{
 
     constructor(props){
         super(props);
-        this.state = {members: [], results: {}, open: false };
+        this.state = {members: [], results: {}, open: false, dialogMessage: "", openDialog: false};
     }
 
-    render(){
+    render(){        
+        let messageBox = (
+            <div/>
+        )
+        if(this.state.dialogMessage.length > 0){
+            messageBox = this.getDialogBox();
+        }
         return (
             <div>
-                <AddMember 
-                   onAddedMember={this.handleAddedMember.bind(this)} 
-                   onRunCalculations={this.handleRunCalculations.bind(this)}
-                   closeDrawer={this.handleCloseDrawer.bind(this)}
-                   members={this.state.members} />
-
+                {messageBox}
+               <AddMember 
+                    onAddedMember={this.handleAddedMember.bind(this)} 
+                    onRunCalculations={this.handleRunCalculations.bind(this)}
+                    closeDrawer={this.handleCloseDrawer.bind(this)}
+                    members={this.state.members} />
                 <Drawer  width={500} openSecondary={true} open={this.state.open} >
                     <AppBar title="Calculation Results" />
                     <CalculationResults results={this.state.results} />
@@ -33,10 +43,63 @@ class BenefitsApp extends Component{
         );
     }
 
+    /**
+     * handleOpenDialog - Handler for closing the dialog box
+     */
+    handleOpenDialog = (message) => {
+        this.setState({dialogMessage: message})
+        this.setState({openDialog: true});
+    };
+    
+    /**
+     * handleCloseDialog - Handler for close dialog click button
+     */
+    handleCloseDialog = () => {
+        this.setState({openDialog: false});
+    };
+    
+    /**
+     * getDialogBox - Gets the JSX for displaying the dialog box
+     * TODO: Separate this dialog box into a separate component
+     */
+    getDialogBox(){
+        const actions = [
+            <FlatButton
+              label="OK"
+              primary={true}
+              onClick={this.handleCloseDialog}
+            />,
+        ];
+    
+        return (
+            <div>
+                <Dialog
+                    title="Message"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.openDialog}
+                    onRequestClose={this.handleCloseDialog}
+                    >
+                    {this.state.dialogMessage}
+                </Dialog>
+            </div>
+        );
+    }
+
+    /**
+     * handleCloseDrawer - The calculation results
+     * open in a drawer component.
+     * This callback handles closing the drawer by
+     * changing the state to closed.
+     */
     handleCloseDrawer(){
         this.setState({open: false});
     }
 
+    /**
+     * handleAddedMember - Call back when member is added
+     * @param {Member} member 
+     */
     handleAddedMember(member){
         const results = Validator.validateMember(member, this.state.members);
         if(results.isValid){
@@ -48,15 +111,17 @@ class BenefitsApp extends Component{
               members: newMembers
             }
           });
-        }
-        else{
-            //TODO: update invalid state
-            //TODO: remove console logs
-            console.log('Member is not valid');
-            console.log(results);
-        }
+        } else {
+            this.handleOpenDialog(results.message);
+        }        
+        return results.isValid;
     }
 
+    /**
+     * Sets the calculation results after call
+     * has been made to run calculations
+     * @param {*CalculationResults} results 
+     */
     setResults(results){
         this.setState({
             results: {
@@ -71,6 +136,10 @@ class BenefitsApp extends Component{
         })
     }
 
+    /**
+     * handleRunCalculations - Makes a call to web servie to run calcuations
+     * If data is not valid it will not make the POST request.
+     */
     handleRunCalculations(){
         const results = Validator.validateEmployeeExists(this.state.members);
         if(results.isValid) {
@@ -86,20 +155,16 @@ class BenefitsApp extends Component{
                 this.setState({open: true});
             })
             .catch((err) => {
-                //TODO: change these alerts to something more aesthetic
-                alert("Error trying to request calculations from server");
-                alert(err);
-                console.log('Error from post to benefitsApi');
-                console.log(err);
+                this.handleOpenDialog("Error from POST... running calculations locally.");
+                
+                const data = calculator.runCalculations({ Members: this.state.members});
+                this.setResults(data);
+                this.setState({open: true});
             })
+        } else {            
+            this.handleOpenDialog(results.message);
         }
-        else{            
-            //TODO: update GUI with message that 
-            //request cannot be processed
-            //TODO: change alert to validation on form
-            alert(results.message);
-            console.log(results.message);
-        }
+        return results.isValid;
     }
 }
 

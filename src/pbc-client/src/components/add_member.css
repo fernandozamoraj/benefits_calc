@@ -1,0 +1,10 @@
+#main-panel{
+    float: left;
+    width: 300px;
+    max-width: 300px;
+}
+#members-panel{
+    float: left;
+    margin-left: 400px;
+    max-width: 300px;
+}

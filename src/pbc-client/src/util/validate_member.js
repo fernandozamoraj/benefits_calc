@@ -3,14 +3,21 @@ const isValidDate = function(d){
     return true;
 }
 
+/**
+ * Validator - Validates an input member.
+ */
 const Validator = {    
+
+    /**
+     * validateEmployeeExists - Validates that an employee exists
+     * @returns true if employee exists. false otherwise.
+     */
     validateEmployeeExists: function(members){
         let results = {};
         results.isValid = true;
         for (let i = 0; i < members.length; i++)             {
             if (members[i].IsEmployee === true) {
                 return results;
-                break;
             }
         }
         results.field = 4;
@@ -19,6 +26,13 @@ const Validator = {
         return results;        
     },
 
+    /**
+     * validateMember - validates the data associated with
+     * each member.
+     * 
+     * @returns true if valid, false otherwise.
+     * 
+     */
     validateMember: function(candidateMember, members) {
         let results = {};
         results.isValid = true;

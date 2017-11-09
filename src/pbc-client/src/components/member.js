@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import randomImage from '../util/random_image';
@@ -11,6 +10,9 @@ const style = {
     borderRadius:50,
 };
 
+/**
+ * Member - Component for displaying Family member information
+ */
 class Member extends Component{
 
     constructor(props){
@@ -22,7 +24,7 @@ class Member extends Component{
 
         const member = this.props.member;
         const name = member.FirstName + ' ' + member.LastName;
-        const role = member.IsEmployee ? 'Employee' : (member.IsSpouse ? 'Spouse' : 'Dependent');
+        const role = member.IsEmployee ? 'Employee' : (member.IsSpouse ? 'Spouse' : 'Dependant');
         const dateOfBirth = member.DateOfBirth.toDateString().substr(4);
         const imageUrl = this.state.randomImageUrl;
 

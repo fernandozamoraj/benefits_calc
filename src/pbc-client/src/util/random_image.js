@@ -1,3 +1,10 @@
+/**
+ * RandomImage - Displays a random image from randomuser.me
+ * This is for demostration purposes only of how an image
+ * would look on the user card.
+ * It randomly selects a user from randomuser.me which
+ * means the gender may not match the intended name. * 
+ */
 class RandomImage{
 
     randomNumber(){
