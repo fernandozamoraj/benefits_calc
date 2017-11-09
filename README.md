@@ -36,7 +36,7 @@ off, calculations sometimes may contain propietary algorithms.  That's not neces
 the case in this demo. The second idea is that it allows me to demonstrate the
 architecture for a MVC .net project.
 
-### Architecture behind the back end
+### Backend Architecture
 
 The architecture behind the back end promotes an application that separates concerns.
 Some of the concepts are rooted in the ideas originated by Eric Evans in his Book
@@ -64,7 +64,7 @@ Writing code under these principles and guidelines, makes the software more test
 of the big benefits of using a Test Driven Development approach is that it forces the code
 to have better structure.
 
-# The Projects in the application
+# Visual Studio Project Structure
 
 This project is broken down into several projects.  For a project this small this may 
 be overkill.  However in a real world project the number of code elements would grow
