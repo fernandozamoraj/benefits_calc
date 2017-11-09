@@ -5,8 +5,8 @@ namespace PBC.Services
     public class Calculator : ICalculator
     {
         /// <summary>
-        /// Calculator is a service object in paradigm of Domain Driven Design (DDD).
-        /// It performs calculations and returns the results of those calculations.
+        /// Calculator is a service object that
+        /// performs calculations and returns the results of those calculations.
         /// </summary>
         /// <param name="family">this parameter is input to perform the calculations</param>
         /// <param name="appConfig">The app config is provides values necessary for the calculations</param>

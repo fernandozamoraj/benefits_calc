@@ -44,7 +44,7 @@ namespace PBC.Tests
         public void AdjustedPeriodAmountForOneEmmpoyee()
         {
             decimal adjustedPeriodAmount = ((_appConfig.AnnualSalary - 1000)-_calculation.EmployerDiscounts) / 26;
-            Assert.AreEqual( adjustedPeriodAmount, _calculation.AdjustPeriodAmount, "Adjusted Period Amount for one employee");
+            Assert.AreEqual( adjustedPeriodAmount, _calculation.AdjustedPeriodAmount, "Adjusted Period Amount for one employee");
         }
 
         [TestMethod]

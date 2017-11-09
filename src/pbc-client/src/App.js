@@ -9,9 +9,7 @@ import Validator from './util/validate_member';
 import MemberList from './components/member_list';
 import BenefitsApp from './components/benefits_app';
 
-
 const muiTheme = getMuiTheme({
-
   appBar: {
     height: 50,
   },
@@ -26,13 +24,11 @@ class App extends Component {
 
   render() {
     return (
-
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div className="App">   
             <BenefitsApp />
         </div>     
-      </MuiThemeProvider>
-      
+      </MuiThemeProvider>      
     );
   }
 }

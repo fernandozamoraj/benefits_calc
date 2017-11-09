@@ -22,41 +22,6 @@ namespace PBC.App.Controllers
             _modelMapper = modelMapper;
         }
 
-        // GET: api/BenefitsApi
-        // This is purely for testing a get
-        // Everything is hardcoded to simply test that
-        // the controller is workin
-        public CalculatedResultsModel Get()
-        {
-            return new CalculatedResultsModel
-            {
-                AdjustedPeriodPayAmount = 1,
-                AnnualSalary = 52000,
-                EmployeeName = "John Doe",
-                AnnualCosts = 1000,
-                EmployerDiscounts = 100,
-                Family = new Family
-                {
-                    Members = new List<Person>
-                    {
-                        new Person
-                        {
-                            FirstName = "John",
-                            LastName = "Doe",
-                            DateOfBirth = System.DateTime.Now,
-                            IsEmployee = true,
-                            IsSpouse = false 
-                        }
-                    }
-                }
-            };
-        }
-
-        // GET: api/BenefitsApi/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/BenefitsApi
         /// <summary>
@@ -72,16 +37,6 @@ namespace PBC.App.Controllers
             CalculatedResultsModel resultsModel =  _modelMapper.MapToResults(results);
 
             return new List<CalculatedResultsModel> { resultsModel };
-        }
-
-        // PUT: api/BenefitsApi/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/BenefitsApi/5
-        public void Delete(int id)
-        {
         }
     }
 }

@@ -49,7 +49,7 @@ namespace PBC.Tests
         [TestMethod]
         public void AdjustedPeriodAmountForOneEmmpoyee()
         {
-            Assert.AreEqual(_calculation.AdjustPeriodAmount, _results.AdjustedPeriodPayAmount, "Adjusted Period Amount for one employee");
+            Assert.AreEqual(_calculation.AdjustedPeriodAmount, _results.AdjustedPeriodPayAmount, "Adjusted Period Amount for one employee");
         }
 
         [TestMethod]

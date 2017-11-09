@@ -34,14 +34,12 @@ class Member extends Component{
                 }
                 style={style}
                 >
-
                 <ul className="member-card">
                     <li>Name: {name}</li>
                     <li>Role: {role}</li>
                     <li>DOB: {dateOfBirth}</li>
                 </ul>
-            </ListItem>          
-
+            </ListItem>  
         );
     }
 }

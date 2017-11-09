@@ -2,6 +2,9 @@
 
 namespace PBC.Models
 {
+    /// <summary>
+    /// Family - This is the aggregate for an employee and the members
+    /// </summary>
     public class Family
     {
         private List<Person> _members;

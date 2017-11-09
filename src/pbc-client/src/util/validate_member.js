@@ -1,23 +1,18 @@
-let isValidDate = function(d){
-    
+const isValidDate = function(d){
     //TODO: for now any date is accepted
     return true;
 }
 
-let Validator = {
-    
+const Validator = {    
     validateEmployeeExists: function(members){
-
         let results = {};
         results.isValid = true;
-
         for (let i = 0; i < members.length; i++)             {
             if (members[i].IsEmployee === true) {
                 return results;
                 break;
             }
         }
-
         results.field = 4;
         results.isValid = false;
         results.message = "There is no employee in this collection";
@@ -27,7 +22,6 @@ let Validator = {
     validateMember: function(candidateMember, members) {
         let results = {};
         results.isValid = true;
-
         if (candidateMember.FirstName.length < 2) {
             results.field = 1;
             results.isValid = false;
@@ -43,7 +37,6 @@ let Validator = {
             results.isValid = false;
             results.message = "Date of birth is not valid or has invalid format";
         }
-
         if (results.isValid === true) {
             for (let i = 0; i < members.length; i++)             {
                 if (candidateMember.IsEmployee && members[i].IsEmployee) {
@@ -60,7 +53,6 @@ let Validator = {
                 }
             }
         }
-
         return results;
     }
 }

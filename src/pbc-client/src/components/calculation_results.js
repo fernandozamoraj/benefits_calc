@@ -26,7 +26,6 @@ class CalculationResults extends Component{
 
     render(){
         const results = this.props.results;
-
         return (
             <div>
                 <ul className="results">
@@ -44,7 +43,6 @@ class CalculationResults extends Component{
 }
 
 CalculationResults.defaultProps = {
-
     results: {
         EmployeeName: '',
         AnnualSalary: 0.0,

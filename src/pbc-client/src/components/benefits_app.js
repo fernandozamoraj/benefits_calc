@@ -9,7 +9,6 @@ import MemberList from './member_list';
 import CalculationResults from './calculation_results';
 import round from '../util/round_money';
 
-
 class BenefitsApp extends Component{
 
     constructor(props){
@@ -39,24 +38,22 @@ class BenefitsApp extends Component{
     }
 
     handleAddedMember(member){
-        
-        let results = Validator.validateMember(member, this.state.members);
-    
+        const results = Validator.validateMember(member, this.state.members);
         if(results.isValid){
-    
           //slice array to avoid modify the original array
           let newMembers = this.state.members.slice();
           newMembers.push(member);
-    
-          this.setState(oldState => {
+          this.setState( (oldState) => {
             return {
               members: newMembers
             }
           });
         }
         else{
-          console.log('Member is not valid');
-          console.log(results);
+            //TODO: update invalid state
+            //TODO: remove console logs
+            console.log('Member is not valid');
+            console.log(results);
         }
     }
 
@@ -72,28 +69,23 @@ class BenefitsApp extends Component{
                 PerPeriodCosts: round(results.PerPeriodCosts, 2)
             }
         })
-
     }
 
     handleRunCalculations(){
-        let self = this;
-        console.log("Running calculations...");
-        
-        console.log(this.state.members);
-
-        let results = Validator.validateEmployeeExists(this.state.members);
-
+        const results = Validator.validateEmployeeExists(this.state.members);
         if(results.isValid) {
+            //api is a different application
+            //you must run the application and
+            //set the "proxy" property in the package.json file
+            //for this project to that (e.g. "proxy": "http://localhost:3002")
             axios.post('api/benefitsApi/', {
-                Members: self.state.members
+                Members: this.state.members
            })
-           .then( function(data){
-               console.log('Data returned from post');
-               console.log(data);
-               self.setResults(data.data[0]);
-               self.setState({open: true});
+           .then((data) => {
+               this.setResults(data.data[0]);
+               this.setState({open: true});
            })
-           .catch(function(err){
+           .catch((err) => {
                //TODO: change these alerts to something more aesthetic
                alert("Error trying to request calculations from server");
                alert(err);
@@ -101,8 +93,7 @@ class BenefitsApp extends Component{
                console.log(err);
            })
         }
-        else{
-            
+        else{            
             //TODO: update GUI with message that 
             //request cannot be processed
             //TODO: change alert to validation on form
@@ -113,4 +104,3 @@ class BenefitsApp extends Component{
 }
 
 export default BenefitsApp;
-

@@ -5,6 +5,9 @@ using PBC.App.Models;
 
 namespace PBC.App.Services
 {
+    /// <summary>
+    /// ModelMapper - Poor man's Model Mapper 
+    /// </summary>
     public class ModelMapper : IModelMapper
     {
         public CalculatedResultsModel MapToResults(CalculationResults calculation)
@@ -15,7 +18,7 @@ namespace PBC.App.Services
             //in real application we can integrate a mapping technology such
             //as automapper
             model.EmployeeName = getEmployeeName(calculation.Family);
-            model.AdjustedPeriodPayAmount = calculation.AdjustPeriodAmount;
+            model.AdjustedPeriodPayAmount = calculation.AdjustedPeriodAmount;
             model.AnnualCosts = calculation.AnnualCosts;
             model.AnnualSalary = calculation.AnnualSalary;
             model.EmployerDiscounts = calculation.EmployerDiscounts;

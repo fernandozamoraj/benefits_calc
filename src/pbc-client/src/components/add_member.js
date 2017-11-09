@@ -50,10 +50,7 @@ class AddMember extends Component{
 
     updateEmployeeCheck(){
         this.setState((oldState) => {
-
-            //TODO figure out how to toggle state for employee
-            let newState = !oldState.IsEmployee;
-
+            const newState = !oldState.IsEmployee;
             return {
               IsEmployee: newState,
               IsSpouse: false
@@ -62,9 +59,8 @@ class AddMember extends Component{
     }
 
     updateSpouseCheck(){        
-        
         this.setState((oldState) => {
-            let newState = !oldState.IsSpouse;
+            const newState = !oldState.IsSpouse;
             return {
               IsSpouse: newState,
               IsEmployee: false
@@ -73,22 +69,18 @@ class AddMember extends Component{
     }
 
     onFirstNameChange(e){
-        console.log(e.target.value);
         this.setState({
             FirstName: e.target.value
         });
-
         if(this.state.FirstName.length > 0) {
             this.props.closeDrawer()
         }
     }
 
     onLastNameChange(e){
-        console.log(e.target.value);
         this.setState({
             LastName: e.target.value
         });
-
         if(this.state.LastName.length > 0) {
             this.props.closeDrawer()
         }
@@ -110,19 +102,13 @@ class AddMember extends Component{
     handleToggle = () => this.setState({open: !this.state.open});
 
     render() {
-
         let thisDefaultDate = this.getDefaultDate();
-
         return(
             <Paper zDepth={1} style={styles.block}>
-                <div className="row" id="invalid-message" data-validation-id="0">
-
-                </div>
+                <div className="row" id="invalid-message" data-validation-id="0"/>
                 <TextField value={this.state.FirstName} hintText="First Name" id="first-name" type="text" onChange={this.onFirstNameChange.bind(this)} className="validate" required />
                 <TextField value={this.state.LastName}hintText="Last Name" id="last-name" type="text" onChange={this.onLastNameChange.bind(this)} className="validate" required/>
-
                 <DatePicker hintText="01/01/1972" defaultDate={thisDefaultDate} id="date-of-birth" type="text" className="validate" required/>
-                
                 <Paper zDepth={0} >
                     <Checkbox 
                         label="Employee"
@@ -131,7 +117,6 @@ class AddMember extends Component{
                         onCheck={this.updateEmployeeCheck.bind(this)}
                         style={styles.checkbox}
                         />
-
                     <Checkbox
                         label="Spouse"
                         checked={this.state.IsSpouse}
@@ -140,11 +125,9 @@ class AddMember extends Component{
                         style={styles.checkbox}
                         />
                 </Paper>    
-
                 <RaisedButton id="btn-add-member" label="Add Member" onClick={this.addMemberClick.bind(this)} >
                     <ContentAdd style={iconStyles} color={teal400} />
                 </RaisedButton>
-    
                 <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
                     <ActionAccountBalance style={iconStyles} color={teal400} />
                 </RaisedButton>

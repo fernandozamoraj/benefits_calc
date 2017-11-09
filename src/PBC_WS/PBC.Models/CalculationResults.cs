@@ -2,24 +2,19 @@
 
 namespace PBC.Models
 {
+    /// <summary>
+    /// CalculationResults - These are the results after the calculator 
+    /// has performed the calculations
+    /// </summary>
     public class CalculationResults
     {
-        public Family Family
-        {
-            get;set;
-        }
+        public Family Family { get; set; }
 
-        public Decimal AnnualSalary
-        {
-            get;set;
-        }
+        public Decimal AnnualSalary { get; set; }
 
-        public Decimal AnnualCosts
-        {
-            get;set;
-        }
+        public Decimal AnnualCosts { get; set; }
 
-        public Decimal AdjustPeriodAmount
+        public Decimal AdjustedPeriodAmount
         {
             get
             {
@@ -27,9 +22,6 @@ namespace PBC.Models
             }
         }
 
-        public Decimal EmployerDiscounts
-        {
-            get;set;
-        }
+        public Decimal EmployerDiscounts { get; set; }
     }
 }
