@@ -16,6 +16,8 @@ The client application runs on localhost:3000.
 The application allows you to perform two functions
    * Add a member
    * Run the calculations
+The MVC .Net solution should run on port 3010.  If not you will need to adjust
+the proxy setting the package.json of the client application.
 
 ###### Validation requirements
    * At a minimum the application requires you to enter an employee member in order to
@@ -114,7 +116,7 @@ a typical line of business application, they deserve their own assembly.
 ### The Benefits Calculator Front End
 
 The second project is a react application.  That project is located in
-/benefits_calc/src/pbc-client/. Since this project is node application, you
+/benefits_calc/src/pbc-client/. Since this project is a node application, you
 will need to install node in order to update it and run it.
 
 The react application has a dependency on the MVC .Net project. 
@@ -137,7 +139,7 @@ The application also contains some utility source files to provide support for t
 `app_config.js` - Holds settings to to assis the calculator such as the pay, discount amount, etc.
 `calculator.js` - This is the calculator on the client side. It serves the purpose of computing the
                 caclculations when connection to the Web Services fails.
-`random_image.js` - Generates a radnom URL to a randomuser.me image.  
+`random_image.js` - Generates a random URL to a randomuser.me image.  
 `round_money.js` - rounds numbers to the specified decimal point
 `validate_member.js` - This file contains logic to provide validation when adding members from the GUI.
 
