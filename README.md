@@ -1,4 +1,4 @@
-# benefitscalc
+# Benefits Calculator
 
 # Demo Challenge App Benefits Calculator
 
