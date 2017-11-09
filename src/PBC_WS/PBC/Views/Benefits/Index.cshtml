@@ -25,35 +25,56 @@
 
         <h3>The BenefitsApiController</h3>
         <pre>
-            using System.Collections.Generic;
-            using System.Web.Http;
-            using PBC.Models;
-            using PBC.App.Models;
-            using PBC.App.Services;
-            using PBC.Services;
+    using System;
+    using System.Diagnostics;
+    using System.Web.Http;
+    using System.Net;
+    using System.Net.Http;
+    using PBC.Models;
+    using PBC.App.Models;
+    using PBC.App.Services;
+    using PBC.Services;
+    namespace PBC.App.Controllers
+    {
+        public class BenefitsApiController : ApiController
+        {
+            IAppConfiguration _appConfig;
+            ICalculator _calculator;
+            IModelMapper _modelMapper;
+            IFamilyValidator _familyValidator;
 
-            namespace PBC.App.Controllers
+            public BenefitsApiController(IAppConfiguration appConfig, ICalculator calculator, IModelMapper modelMapper, IFamilyValidator familyValidator)
             {
-                public class BenefitsApiController : ApiController
+                _calculator = calculator;
+                _appConfig = appConfig;
+                _modelMapper = modelMapper;
+                _familyValidator = familyValidator;
+            }
+
+            public HttpResponseMessage Post([FromBody]Family model)
+            {
+                try
                 {
-                    IAppConfiguration _appConfig;
-                    ICalculator _calculator;
-                    IModelMapper _modelMapper;
-                    public BenefitsApiController(IAppConfiguration appConfig, ICalculator calculator, IModelMapper modelMapper)
-                    {
-                        _calculator = calculator;
-                        _appConfig = appConfig;
-                        _modelMapper = modelMapper;
-                    }
-                   
-                    public IEnumerable&lt;CalculatedResultsModel&gt; Post([FromBody]Family model)
+                    var validationResults = _familyValidator.Run(model);
+                    if (validationResults.IsValid)
                     {
                         CalculationResults results = _calculator.RunCalculations(model, _appConfig);
-                        CalculatedResultsModel resultsModel =  _modelMapper.MapToResults(results);
-                        return new List&lt;CalculatedResultsModel&gt; { resultsModel };
+                        CalculatedResultsModel resultsModel = _modelMapper.MapToResults(results);
+                        return Request.CreateResponse(HttpStatusCode.OK, resultsModel);
                     }
+                    HttpError err = new HttpError("Invalid input parameter. " + validationResults.Message);
+                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, err);
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                    //TODO: log the exception
+                    HttpError err = new HttpError("Exception occurred check server logs");
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err);
                 }
             }
+        }
+    }
         </pre>
         <h3>Calling the service using a POST request</h3>
         <p>Several client side services exist for calling the service.  Calling with your choice of AJAX library will be very similar.</p>
