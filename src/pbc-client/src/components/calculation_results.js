@@ -6,7 +6,7 @@ import {
     TableRowColumn,
   } from 'material-ui/Table';
 
-import './calculation_results.css';
+import './styles/calculation_results.css';
 
 /**
  * CalculationResults - This is the component to display

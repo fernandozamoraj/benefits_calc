@@ -5,10 +5,10 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
+import './styles/add_member.css';
 import {teal400} from 'material-ui/styles/colors';
-import MemberList from './member_list';
-import './add_member.css';
+
+
 
 const iconStyles = {
     marginRight: 10,
@@ -17,7 +17,7 @@ const iconStyles = {
 const styles = {
     block: {
       maxWidth: 450,
-      marginLeft: 250,
+      marginLeft: 10,
       padding: 50
     },
     checkbox: {
@@ -70,8 +70,7 @@ class AddMember extends Component{
                             style={styles.checkbox}
                             />
                     </Paper>    
-                    <RaisedButton id="btn-add-member" label="Add Member" onClick={this.addMemberClick.bind(this)} 
-                        zDepth={3}
+                    <RaisedButton id="btn-add-member" label="Add" onClick={this.addMemberClick.bind(this)} 
                         style={{
                             margin: '10px',
                             color: '#ff0000'
@@ -79,13 +78,8 @@ class AddMember extends Component{
                     >
                         <ContentAdd style={iconStyles} color={teal400} />
                     </RaisedButton>
-                    <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
-                        <ActionAccountBalance style={iconStyles} color={teal400} />
-                    </RaisedButton>
                 </Paper>
-                <Paper zDepth={0}>
-                    <MemberList members={this.props.members}/>
-                </Paper>
+
             </Paper>
         );
     }
@@ -145,9 +139,6 @@ class AddMember extends Component{
         this.setState({
             FirstName: e.target.value
         });
-        if(this.state.FirstName.length > 0) {
-            this.props.closeDrawer()
-        }
     }
 
     /**
@@ -160,9 +151,6 @@ class AddMember extends Component{
         this.setState({
             LastName: e.target.value
         });
-        if(this.state.LastName.length > 0) {
-            this.props.closeDrawer()
-        }
     }
 
     /**
@@ -176,17 +164,8 @@ class AddMember extends Component{
         const success = this.props.onAddedMember(Object.assign({}, this.state));
         if(success){
             this.clearState();
+            this.props.closeDrawer()
         }
-    }
-
-    /**
-     * calculateClick - Handler for when calculate button is clicked
-     * Notifies the parent component so that the parent can run
-     * calculations.
-     * @param {event args} e 
-     */
-    calculateClick(e){
-        this.props.onRunCalculations(Object.assign({}, this.state));
     }
 
     /**

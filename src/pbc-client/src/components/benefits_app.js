@@ -3,13 +3,30 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 import Validator from '../util/validate_member';
 import AddMember from './add_member';
+import MemberList from './member_list';
 import CalculationResults from './calculation_results';
 import round from '../util/round_money';
 import calculator from '../util/calculator';
+import Paper from 'material-ui/Paper';
+import {teal400} from 'material-ui/styles/colors';
+import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
+import '../gridiculous.css';
 
+const iconStyles = {
+    marginRight: 10,
+};
+
+const styles = {
+    block: {
+      maxWidth: 450,
+      marginLeft: 10,
+      padding: 50
+    },
+};
 /**
  * BenefitsApp - Top level component for the benefits application
  */
@@ -29,35 +46,47 @@ class BenefitsApp extends Component{
         }
         return (
             <div>
+                <AppBar title="Benefits Application" />
                 {messageBox}
-               <AddMember 
-                    onAddedMember={this.handleAddedMember.bind(this)} 
-                    onRunCalculations={this.handleRunCalculations.bind(this)}
-                    closeDrawer={this.handleCloseDrawer.bind(this)}
-                    members={this.state.members} />
+                <div className="row">
+                    <RaisedButton label="Add Family Member" onClick={this.addMemberClick.bind(this)}>
+                        <ActionAccountBalance style={iconStyles} color={teal400} />
+                    </RaisedButton>
+                    <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
+                            <ActionAccountBalance style={iconStyles} color={teal400} />
+                    </RaisedButton>
+                </div>
+                <div className="row">
+                    <div className="c4">
+                        <MemberList members={this.state.members}/>
+                    </div>
+                    <div className="c4">
+                        <Paper styles={styles.block}>
+                            <CalculationResults results={this.state.results} />
+                        </Paper>
+                    </div>
+                </div>
                 <Drawer  width={500} openSecondary={true} open={this.state.open} >
-                    <AppBar title="Calculation Results" />
-                    <CalculationResults results={this.state.results} />
+                    <AddMember 
+                        onAddedMember={this.handleAddedMember.bind(this)} 
+                        onRunCalculations={this.handleRunCalculations.bind(this)}
+                        closeDrawer={this.handleCloseDrawer.bind(this)}
+                        members={this.state.members} />
                 </Drawer>
             </div>
         );
     }
 
-    /**
-     * handleOpenDialog - Handler for closing the dialog box
+     /**
+     * calculateClick - Handler for when calculate button is clicked
+     * Notifies the parent component so that the parent can run
+     * calculations.
+     * @param {event args} e 
      */
-    handleOpenDialog = (message) => {
-        this.setState({dialogMessage: message})
-        this.setState({openDialog: true});
-    };
-    
-    /**
-     * handleCloseDialog - Handler for close dialog click button
-     */
-    handleCloseDialog = () => {
-        this.setState({openDialog: false});
-    };
-    
+    calculateClick(e){
+        this.handleRunCalculations();
+    }
+
     /**
      * getDialogBox - Gets the JSX for displaying the dialog box
      * TODO: Separate this dialog box into a separate component
@@ -94,6 +123,25 @@ class BenefitsApp extends Component{
      */
     handleCloseDrawer(){
         this.setState({open: false});
+    }
+
+        /**
+     * handleOpenDialog - Handler for closing the dialog box
+     */
+    handleOpenDialog = (message) => {
+        this.setState({dialogMessage: message})
+        this.setState({openDialog: true});
+    };
+    
+    /**
+     * handleCloseDialog - Handler for close dialog click button
+     */
+    handleCloseDialog = () => {
+        this.setState({openDialog: false});
+    };    
+
+    addMemberClick(){
+        this.setState({open: true});
     }
 
     /**
@@ -152,14 +200,11 @@ class BenefitsApp extends Component{
             })
             .then((data) => {
                 this.setResults(data.data);
-                this.setState({open: true});
             })
             .catch((err) => {
                 this.handleOpenDialog("Error from POST... running calculations locally.");
-                
                 const data = calculator.runCalculations({ Members: this.state.members});
                 this.setResults(data);
-                this.setState({open: true});
             })
         } else {            
             this.handleOpenDialog(results.message);
