@@ -26,13 +26,13 @@ The application allows you to perform two functions
 
 ### The Benefits Calculator Back End
 
-The first project is the back end, an MVC .NET web api project. The project
+The first project is the back end, an MVC .NET Web API project. The project
 is located in the folder /benefits_calc/src/PBC_WS/.  You can open the project
 in Visual Studio 2015. The purpose of this project is to run the calculations on
 the back end.  
 
 There are two main ideas behind running the calculations on the back end. First 
-off, calculations sometimes may contain propietary algorithms.  That's not necessarily
+off, calculations sometimes may contain proprietary algorithms.  That's not necessarily
 the case in this demo. The second idea is that it allows me to demonstrate the
 architecture for a MVC .net project.
 
@@ -40,8 +40,8 @@ architecture for a MVC .net project.
 
 The architecture behind the back end promotes an application that separates concerns.
 Some of the concepts are rooted in the ideas originated by Eric Evans in his Book
-Domain Driven Design.  The architecture divides objects into different categories such
-as Services, Entities, Aggregates, Repositories.
+Domain-Driven Design.  The architecture divides objects into different categories such
+as Services, Entities, Aggregates, Repositories and Data Transfer Objects.
 
 This approach helps further promote SOLID principles such as 
 
@@ -62,14 +62,14 @@ The approach also complements clean code concepts, such as good names for code e
 
 Writing code under these principles and guidelines, makes the software more testable.  One
 of the big benefits of using a Test Driven Development approach is that it forces the code
-to have better structure.
+to have better structure. 
 
 # Visual Studio Project Structure
 
 This project is broken down into several projects.  For a project this small this may 
-be overkill.  However in a real world project the number of code elements would grow
+be overkill.  However, in a real world project the number of code elements would grow
 significantly and then it would become extremelly important to have the projects neatly
-organized into appropriate collections of assemblies, folders and functional systems.
+organized into appropriate collections of assemblies, folders and functional sub-systems.
 
 ### The Main Application
 
@@ -85,27 +85,31 @@ modular and allow better re-use.
 
 Another project in the solution is the PBC.Services.  The services are not intra-services
 components. Rather they are plain C# classes that provide some sort of service such as 
-transforming some input into some for of output.  This allows the services to be reused.
+transforming some input into some form of output.  This allows the services to be reused.  
+It also allows separation between state computations.
+
 Typically services are bound to some interface.  This makes it easier to replace the dependency
 at run time.  For example a in this project the Calculator implements the ICalculator 
 interface. The calculator is later utilized by the BenefitsApiController.  However the
-controller only depends on the abastraction, ICalculator.  This allows the controller
+controller only depends on the abstraction, ICalculator.  This allows the controller
 to depend on the abstraction and not the concrete implementation.
 
-This goes hand in hand with the Open/Closed principle because it allows changes to be made
-to the calculator or even replace the calculator without affecting the controller.
+This approach goes hand in hand with the Open/Closed principle because it allows changes to be made
+to the calculator or even replace the calculator without affecting the controller. Thus,
+it allows the controller to be open for extension but closed for modification.
 
 The PBC.Models project promotes separating the domain POCOs into cohesive units.  This 
 cohesiveness promotes the idea of single responsiblity. Most models' responsibility is
 to group together a collection of data into a larger entity.  This is the concept behind
 the CalculationResults.  Notice that, although most models may appear anemic, it is OK
 to give them behavior. This is the case with the CalculationResults' attribute AdjustedPeriodAmount.
-However, the object is still lean and much easier to read and grasp.
+Is a small for of behavior. However, the object is still lean and much easier to read and grasp.
 
-The PBC.Repos has litte responsiblity in this project.  This is another example of a service
+The PBC.Repos has litte responsiblity in this project.  That is mostly because I decided
+to create a separate application for the GUI and also because the API controller does
+not make any calls to a back end database.  This is another example of a service
 type structure.  However, since data access is such a common and distinct operation in 
 a typical line of business application, they deserve their own assembly.
-
 
 ### The Benefits Calculator Front End
 
@@ -136,4 +140,15 @@ The application also contains some utility source files to provide support for t
 `random_image.js` - Generates a radnom URL to a randomuser.me image.  
 `round_money.js` - rounds numbers to the specified decimal point
 `validate_member.js` - This file contains logic to provide validation when adding members from the GUI.
+
+The application is intuitive enough in my opinion and therefore it should be easy enough to run.
+
+# Frameworks and Third Party Libraries in this project
+
+Structure Map
+MVC .Net
+
+React
+Material-ui
+axios
 
