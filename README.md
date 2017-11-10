@@ -10,7 +10,11 @@
 4. run the command `npm install` to update all dependencies in the project
 5. run the command `npm start` to start the application
 
+## Screenshot 1
 ![Screen Shot of App](https://raw.githubusercontent.com/fernandozamoraj/benefits_calc/master/docs/screenshot1.PNG)
+
+## Screenshot 2
+![Screen Shot of App](https://raw.githubusercontent.com/fernandozamoraj/benefits_calc/master/docs/screenshot3.PNG)
 ### Running the application
 
 The client application runs on localhost:3000.
