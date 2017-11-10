@@ -52,7 +52,12 @@ class AddMember extends Component{
                     <div className="row" id="invalid-message" data-validation-id="0"/>
                     <TextField value={this.state.FirstName} hintText="First Name" id="first-name" type="text" onChange={this.onFirstNameChange.bind(this)} className="validate" required />
                     <TextField value={this.state.LastName}hintText="Last Name" id="last-name" type="text" onChange={this.onLastNameChange.bind(this)} className="validate" required/>
-                    <DatePicker hintText="01/01/1972" defaultDate={thisDefaultDate} id="date-of-birth" type="text" className="validate" required/>
+                    <DatePicker hintText="01/01/1972" defaultDate={thisDefaultDate} 
+                                id="date-of-birth" 
+                                type="text" 
+                                value={this.state.DateOfBirth}
+                                onChange={this.handleDateChange}
+                                />
                     <Paper zDepth={0} >
                         <Checkbox 
                             label="Employee"
@@ -87,6 +92,12 @@ class AddMember extends Component{
             </Paper>
         );
     }
+
+    handleDateChange = (event, date) => {
+        this.setState({
+          DateOfBirth: date,
+        });
+    };
 
     btnCloseClick(e){
        this.props.closeDrawer()
