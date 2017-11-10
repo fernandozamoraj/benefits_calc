@@ -40,12 +40,12 @@ the proxy setting the package.json of the client application.
 The first project is the back end, an MVC .NET Web API project. The project
 is located in the folder /benefits_calc/src/PBC_WS/.  You can open the project
 in Visual Studio 2015. The purpose of this project is to run the calculations on
-the back-end.
+the back end.
 
-The back-end also simulates saving each family member entered into the system.
+The back end also simulates saving each family member entered into the system.
 The client application will still run even when the back end is down. However,
 you will get a notification message box telling that communication with the 
-back-end failed and the program will run the calculations locally.   
+back end failed and the program will run the calculations locally.   
 
 There are two main ideas behind running the calculations on the back end. First 
 off, calculations sometimes may contain proprietary algorithms.  That's not necessarily
@@ -55,7 +55,7 @@ architecture for a MVC .net project.
 The other idea with simulating saving to the back end is to demonstrate how
 to round trip to the back end.
 
-### Backend Architecture
+### Back End Architecture
 
 The architecture behind the back end promotes an application that separates concerns.
 Some of the concepts are rooted in the ideas originated by Eric Evans in his Book
@@ -166,14 +166,17 @@ The application is intuitive enough in my opinion and therefore it should be eas
 
 #### C# and .Net
 * C#
-* [Structure Map](http://structuremap.github.io/)
-* [MVC .Net](https://www.asp.net/mvc)
+* [Structure Map](http://structuremap.github.io/) - For dependency injection
+* [MVC .Net](https://www.asp.net/mvc) - For backed business logic
+* [ASP .Net Wep API 2.0](https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) - For the back end web services
 
 #### Client - Front End
 * HTML
 * CSS
+* [Gridiculous](https://github.com/cbavota/Gridiculous) for laying out grids to fill the gaps by the other Styling frameworks
 * JavaScript
-* [ReactJS](https://reactjs.org/)
-* [Material-ui](http://www.material-ui.com)
-* [axios](https://www.npmjs.com/package/axios)
+* [ReactJS](https://reactjs.org/) - Framework for GUI components
+* [Material-ui](http://www.material-ui.com) - CSS Framework as React Components specificly for React 
+* [axios](https://www.npmjs.com/package/axios) - For AJAX calls
+* [uuid js](https://www.npmjs.com/package/uuid) - For Generating UUIDs
 
