@@ -58,7 +58,7 @@ class BenefitsApp extends Component{
                                 label="Add Family Member"
                                 onClick={this.addMemberClick.bind(this)}
                                 primary={true}>
-                                <ContentAdd style={iconStyles} color={"#333"} />
+                                <ContentAdd style={iconStyles} color={"#ccc"} />
                             </RaisedButton>
                         </div>
                         <div className="c3">
@@ -67,7 +67,7 @@ class BenefitsApp extends Component{
                                   label="Calculate" 
                                   onClick={this.calculateClick.bind(this)}
                                   primary={true}>
-                                    <ActionAccountBalance style={iconStyles} color={"#333"}/>
+                                    <ActionAccountBalance style={iconStyles} color={"#ccc"}/>
                             </RaisedButton>
                         </div>
                     </div>
