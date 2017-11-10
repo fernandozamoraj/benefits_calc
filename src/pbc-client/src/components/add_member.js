@@ -7,6 +7,7 @@ import Checkbox from 'material-ui/Checkbox';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentBackspace from 'material-ui/svg-icons/content/backspace';
 import './styles/add_member.css';
+import '../gridiculous.css';
 
 const iconStyles = {
     marginRight: 10,
@@ -73,21 +74,27 @@ class AddMember extends Component{
                             onCheck={this.updateSpouseCheck.bind(this)}
                             style={styles.checkbox}
                             />
-                    </Paper>    
-                    <RaisedButton 
-                          id="btn-add-member" 
-                          label="Add" 
-                          onClick={this.addMemberClick.bind(this)}
-                          primary={true}>
-                        <ContentAdd style={iconStyles} color={"#333"} />
-                    </RaisedButton>
-                    <RaisedButton 
-                        id="btn-close" 
-                        label="Cancel" 
-                        onClick={this.btnCloseClick.bind(this)}
-                        primary={true}>
-                        <ContentBackspace style={iconStyles} color={"#333"} />
-                    </RaisedButton>
+                    </Paper> 
+                    <div className="row">
+                        <div className="c5">   
+                            <RaisedButton 
+                                id="btn-add-member" 
+                                label="Add" 
+                                onClick={this.addMemberClick.bind(this)}
+                                primary={true}>
+                                <ContentAdd style={iconStyles} color={"#333"} />
+                            </RaisedButton>
+                        </div>
+                        <div className="c7">
+                            <RaisedButton 
+                                id="btn-close" 
+                                label="Cancel" 
+                                onClick={this.btnCloseClick.bind(this)}
+                                primary={true}>
+                                <ContentBackspace style={iconStyles} color={"#333"} />
+                            </RaisedButton>
+                        </div>
+                    </div>
                 </Paper>
             </Paper>
         );
