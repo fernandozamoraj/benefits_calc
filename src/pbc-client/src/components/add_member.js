@@ -82,7 +82,7 @@ class AddMember extends Component{
                                 label="Add" 
                                 onClick={this.addMemberClick.bind(this)}
                                 primary={true}>
-                                <ContentAdd style={iconStyles} color={"#333"} />
+                                <ContentAdd style={iconStyles} color={"#ccc"} />
                             </RaisedButton>
                         </div>
                         <div className="c7">
@@ -91,7 +91,7 @@ class AddMember extends Component{
                                 label="Cancel" 
                                 onClick={this.btnCloseClick.bind(this)}
                                 primary={true}>
-                                <ContentBackspace style={iconStyles} color={"#333"} />
+                                <ContentBackspace style={iconStyles} color={"#ccc"} />
                             </RaisedButton>
                         </div>
                     </div>
