@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Paper from 'material-ui/Paper';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import './App.css';
 import BenefitsApp from './components/benefits_app';
@@ -19,11 +18,9 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <Paper>
-          <div className="App">   
-              <BenefitsApp />
-          </div>
-        </Paper>       
+        <div className="App">   
+            <BenefitsApp />
+        </div>
       </MuiThemeProvider>      
     );
   }

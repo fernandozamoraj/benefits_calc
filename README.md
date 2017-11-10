@@ -6,7 +6,7 @@
 
 1. Download or clone this repository.
 2. Navigate to /benefits_calc/src/PBC_WS/ rebuild the solution and run
-3. Navigate to /benefits_calc/src/pbc-client/src/ from the command line
+3. Navigate to /benefits_calc/src/pbc-client from the command line
 4. run the command `npm install` to update all dependencies in the project
 5. run the command `npm start` to start the application
 
@@ -16,7 +16,7 @@ The client application runs on localhost:3000.
 The application allows you to perform two functions
    * Add a member
    * Run the calculations
-The MVC .Net solution should run on port 3010.  If not you will need to adjust
+The MVC .Net solution should run on port 3010.  If it doesn't, then you will need to adjust
 the proxy setting the package.json of the client application.
 
 ###### Validation requirements
@@ -31,12 +31,20 @@ the proxy setting the package.json of the client application.
 The first project is the back end, an MVC .NET Web API project. The project
 is located in the folder /benefits_calc/src/PBC_WS/.  You can open the project
 in Visual Studio 2015. The purpose of this project is to run the calculations on
-the back end.  
+the back-end.
+
+The back-end also simulates saving each family member entered into the system.
+The client application will still run even when the back end is down. However,
+you will get a notification message box telling that communication with the 
+back-end failed and the program will run the calculations locally.   
 
 There are two main ideas behind running the calculations on the back end. First 
 off, calculations sometimes may contain proprietary algorithms.  That's not necessarily
 the case in this demo. The second idea is that it allows me to demonstrate the
 architecture for a MVC .net project.
+
+The other idea with simulating saving to the back end is to demonstrate how
+to round trip to the back end.
 
 ### Backend Architecture
 

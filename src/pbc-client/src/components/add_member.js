@@ -7,9 +7,6 @@ import Checkbox from 'material-ui/Checkbox';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentBackspace from 'material-ui/svg-icons/content/backspace';
 import './styles/add_member.css';
-import {teal400} from 'material-ui/styles/colors';
-
-
 
 const iconStyles = {
     marginRight: 10,
@@ -72,25 +69,20 @@ class AddMember extends Component{
                             style={styles.checkbox}
                             />
                     </Paper>    
-                    <RaisedButton id="btn-add-member" label="Add" onClick={this.addMemberClick.bind(this)} 
-                        style={{
-                            margin: '10px',
-                            color: '#ff0000'
-                        }} 
-                    >
-                        <ContentAdd style={iconStyles} color={teal400} />
+                    <RaisedButton 
+                          id="btn-add-member" 
+                          label="Add" 
+                          onClick={this.addMemberClick.bind(this)}
+                          primary={true}>
+                        <ContentAdd style={iconStyles} color={"#333"} />
                     </RaisedButton>
-                    <RaisedButton id="btn-close" label="Cancel" onClick={this.btnCloseClick.bind(this)} 
-                        style={{
-                            margin: '10px',
-                            color: '#ff0000'
-                        }} 
-                    >
-                        <ContentBackspace style={iconStyles} color={teal400} />
+                    <RaisedButton 
+                        id="btn-close" 
+                        label="Cancel" 
+                        onClick={this.btnCloseClick.bind(this)}
+                        primary={true}>
+                        <ContentBackspace style={iconStyles} color={"#333"} />
                     </RaisedButton>
-                </Paper>
-                <Paper>
-
                 </Paper>
             </Paper>
         );

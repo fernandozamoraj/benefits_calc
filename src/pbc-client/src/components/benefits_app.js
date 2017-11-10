@@ -13,7 +13,6 @@ import CalculationResults from './calculation_results';
 import round from '../util/round_money';
 import calculator from '../util/calculator';
 import Paper from 'material-ui/Paper';
-import {teal400} from 'material-ui/styles/colors';
 import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import '../gridiculous.css';
@@ -55,13 +54,20 @@ class BenefitsApp extends Component{
                     {messageBox}
                     <div className="row">
                         <div className="c3">
-                            <RaisedButton label="Add Family Member" onClick={this.addMemberClick.bind(this)}>
-                                <ContentAdd style={iconStyles} color={teal400} />
+                            <RaisedButton 
+                                label="Add Family Member"
+                                onClick={this.addMemberClick.bind(this)}
+                                primary={true}>
+                                <ContentAdd style={iconStyles} color={"#333"} />
                             </RaisedButton>
                         </div>
                         <div className="c3">
-                            <RaisedButton id="btn-calculate" label="Calculate" onClick={this.calculateClick.bind(this)} >
-                                    <ActionAccountBalance style={iconStyles} color={teal400} />
+                            <RaisedButton 
+                                  id="btn-calculate" 
+                                  label="Calculate" 
+                                  onClick={this.calculateClick.bind(this)}
+                                  primary={true}>
+                                    <ActionAccountBalance style={iconStyles} color={"#333"}/>
                             </RaisedButton>
                         </div>
                     </div>
@@ -175,15 +181,22 @@ class BenefitsApp extends Component{
                 newMember.DateOfBirth = new Date(newMember.DateOfBirth);
                 newMembers.push(data.data);
                 this.setState( (oldState) => {
-                return {
-                    members: newMembers
-                }
+                    return {
+                        members: newMembers
+                    }
                 });
             })
             .catch((err) => {
                 this.handleOpenDialog("Error from POST... running calculations locally.");
-                const data = calculator.runCalculations({ Members: this.state.members});
-                this.setResults(data);
+                
+                //call to back end failed but submit locally anyway
+                let newMembers = this.state.members.slice();
+                newMembers.push(member);
+                this.setState( (oldState) => {
+                    return {
+                        members: newMembers
+                    }
+                });
             })
         } else {
             this.handleOpenDialog(results.message);

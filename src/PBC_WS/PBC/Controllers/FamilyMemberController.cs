@@ -13,7 +13,6 @@ namespace PBC.App.Controllers
     //secret sauce to configure webapi with structure map https://www.exceptionnotfound.net/setting-up-dependency-injection-in-web-api-with-structuremap/
     public class FamilyMemberController : ApiController
     {
-
         IAppConfiguration _appConfig;
         ICalculator _calculator;
         IModelMapper _modelMapper;
