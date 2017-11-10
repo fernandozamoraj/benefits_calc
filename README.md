@@ -169,6 +169,7 @@ The application is intuitive enough in my opinion and therefore it should be eas
 * [Structure Map](http://structuremap.github.io/) - For dependency injection
 * [MVC .Net](https://www.asp.net/mvc) - For backed business logic
 * [ASP .Net Wep API 2.0](https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) - For the back end web services
+* Visual Studio Unit Test Framewor - For unit testing the back end
 
 #### Client - Front End
 * HTML
