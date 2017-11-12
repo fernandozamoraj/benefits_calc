@@ -137,7 +137,7 @@ class BenefitsApp extends Component{
      * This callback handles closing the drawer by
      * changing the state to closed.
      */
-    handleCloseDrawer(){
+    handleCloseDrawer = () => {
         this.setState({open: false});
     }
 
@@ -156,7 +156,7 @@ class BenefitsApp extends Component{
         this.setState({openDialog: false});
     };    
 
-    addMemberClick(){
+    addMemberClick = () => {
         this.setState({open: true});
     }
 

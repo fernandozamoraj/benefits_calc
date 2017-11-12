@@ -133,22 +133,22 @@ a typical line of business application, they deserve their own assembly.
 ### The Benefits Calculator Front End
 
 The second project is a react application.  That project is located in
-/benefits_calc/src/pbc-client/. Since this project is a node application, you
+`/benefits_calc/src/pbc-client/`. Since this project is a node application, you
 will need to install node in order to update it and run it.
 
 The react application has a dependency on the MVC .Net project. 
 
-The application consists of several GUI components.
+The application consists of several GUI React components.
 
 These components are
 
 ```
 App
   |----BenefitsApp
-       |----AddMember
-       |    |----MembersList
-       |         |----Member
-       |----CalculationResults 
+       |
+       |---MemberList
+       |-- CalculationResults
+       |---AddMember      
 ```
 
 The application also contains some utility source files to provide support for the components
@@ -169,7 +169,7 @@ The application is intuitive enough in my opinion and therefore it should be eas
 * [Structure Map](http://structuremap.github.io/) - For dependency injection
 * [MVC .Net](https://www.asp.net/mvc) - For backed business logic
 * [ASP .Net Wep API 2.0](https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) - For the back end web services
-* Visual Studio Unit Test Framewor - For unit testing the back end
+* Visual Studio Unit Test Framework- For unit testing the back end
 
 #### Client - Front End
 * HTML
